@@ -119,6 +119,113 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnChangePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                oldEmail.setVisibility(View.GONE);
+                newEmail.setVisibility(View.GONE);
+                password.setVisibility(View.GONE);
+                newPassword.setVisibility(View.VISIBLE);
+                changeEmail.setVisibility(View.GONE);
+                changePassword.setVisibility(View.VISIBLE);
+                sendEmail.setVisibility(View.GONE);
+                remove.setVisibility(View.GONE);
+            }
+        });
+
+        changePassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                String newPasswordString = newPassword.getText().toString().trim();
+                if(user != null && !newPasswordString.equals("")){
+                    if(newPasswordString.length() < 6){
+                        newPassword.setError("Password should contain at least 6 characters");
+                        progressBar.setVisibility(View.GONE);
+                    }else{
+                        user.updatePassword(newPasswordString)
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if(task.isSuccessful()){
+                                            Toast.makeText(MainActivity.this, "Password updated, login with your new password", Toast.LENGTH_LONG).show();
+                                            signOut();
+                                        }else{
+                                            Toast.makeText(MainActivity.this, "Failed to update password!", Toast.LENGTH_SHORT).show();
+                                        }
+                                        progressBar.setVisibility(View.GONE);
+                                    }
+                                });
+                    }
+                }else if(newPasswordString.equals("")){
+                    newPassword.setError("Enter password");
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        btnSendResetEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                oldEmail.setVisibility(View.VISIBLE);
+                newEmail.setVisibility(View.GONE);
+                password.setVisibility(View.GONE);
+                newPassword.setVisibility(View.GONE);
+                changeEmail.setVisibility(View.GONE);
+                changePassword.setVisibility(View.GONE);
+                sendEmail.setVisibility(View.VISIBLE);
+                remove.setVisibility(View.GONE);
+            }
+        });
+
+        sendEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                String oldEmailString = oldEmail.getText().toString().trim();
+                if(!oldEmailString.equals("")){
+                    auth.sendPasswordResetEmail(oldEmailString)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(MainActivity.this, "Password reset instructions sent by email", Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(MainActivity.this, "Failed to send password reset email", Toast.LENGTH_SHORT).show();
+                                    }
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                }else{
+                    oldEmail.setError("Enter email");
+                    progressBar.setVisibility(View.GONE);
+                }
+            }
+        });
+
+        btnRemoveUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
+                if(user != null){
+                    user.delete()
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        Toast.makeText(MainActivity.this, "Your profile is successfully deleted!", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(MainActivity.this, SignupActivity.class));
+                                        finish();
+                                    }else{
+                                        Toast.makeText(MainActivity.this, "Failed to delete your account!", Toast.LENGTH_SHORT).show();
+                                    }
+                                    progressBar.setVisibility(View.GONE);
+                                }
+                            });
+                }
+            }
+        });
     }
 
     public void signOut(){
