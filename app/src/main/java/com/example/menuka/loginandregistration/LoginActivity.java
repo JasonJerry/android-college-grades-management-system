@@ -78,14 +78,16 @@ public class LoginActivity extends AppCompatActivity {
                     return;
                 }
 
-                progressBar.setVisibility(View.VISIBLE);
+                if(progressBar != null) {
+                    progressBar.setVisibility(View.VISIBLE);
+                }
 
                 // Authenticate user
                 auth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressBar.setVisibility(View.GONE);
+//                                progressBar.setVisibility(View.GONE);
                                 if(!task.isSuccessful()){
                                     // error occurred
                                     if(password.length() < 6){
