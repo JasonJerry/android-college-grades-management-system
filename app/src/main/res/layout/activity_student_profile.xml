@@ -28,18 +28,18 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="27dp"
         android:layout_below="@+id/btnGradesManagement"
-        android:layout_alignLeft="@+id/btnReceivedFee"
-        android:layout_alignStart="@+id/btnReceivedFee" />
+        android:layout_alignLeft="@+id/btnGradesManagement"
+        android:layout_alignStart="@+id/btnGradesManagement" />
 
     <Button
         android:id="@+id/btnReceivedFee"
         android:text="Received Feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="23dp"
         android:layout_below="@+id/btnAccountSettings"
-        android:layout_alignRight="@+id/btnGradesManagement"
-        android:layout_alignEnd="@+id/btnGradesManagement" />
+        android:layout_alignLeft="@+id/btnAccountSettings"
+        android:layout_alignStart="@+id/btnAccountSettings" />
 
 
 </RelativeLayout>

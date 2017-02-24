@@ -22,11 +22,20 @@ public class SignupActivity extends AppCompatActivity {
     private Button btnSignIn, btnSignUp, btnResetPassword;
     private ProgressBar progressBar;
     private FirebaseAuth auth;
+    private Button btnTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+
+        btnTemp = (Button) findViewById(R.id.btnTemp);
+        btnTemp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SignupActivity.this, SemestersActivity.class));
+            }
+        });
 
         // Get Firebase auth instance
         auth = FirebaseAuth.getInstance();

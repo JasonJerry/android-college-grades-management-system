@@ -20,6 +20,12 @@
         android:padding="@dimen/activity_horizontal_margin"
         >
 
+        <Button
+            android:text="Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/btnTemp" />
+
         <ImageView
             android:layout_width="@dimen/logo_w_h"
             android:layout_height="@dimen/logo_w_h"

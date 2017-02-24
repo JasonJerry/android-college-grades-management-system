@@ -20,7 +20,8 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".LoginActivity" />
-        <activity android:name=".StudentProfileActivity"></activity>
+        <activity android:name=".StudentProfileActivity" />
+        <activity android:name=".SemestersActivity"></activity>
     </application>
 
 </manifest>
