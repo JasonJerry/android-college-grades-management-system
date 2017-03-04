@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">LoginAndRegistration</string>
+    <string name="app_name">College Grades Management System</string>
 
     <string name="action_sign_in_short">Register</string>
     <string name="email">Email</string>

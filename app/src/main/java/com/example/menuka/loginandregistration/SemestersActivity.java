@@ -1,6 +1,5 @@
 package com.example.menuka.loginandregistration;
 
-import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,5 +29,7 @@ public class SemestersActivity extends AppCompatActivity {
                 foldingCell.toggle(false);
             }
         });
+
+
     }
 }
