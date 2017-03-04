@@ -32,5 +32,8 @@ dependencies {
     compile 'com.ramotion.foldingcell:folding-cell:1.1.0'
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:design:25.1.1'
+
+    // Android Testing Support Library's runner and rules
+
 }
 apply plugin: 'com.google.gms.google-services'
