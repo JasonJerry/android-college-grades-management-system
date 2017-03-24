@@ -2,8 +2,8 @@ package com.example.menuka.loginandregistration;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import adapters.ModuleAdapter;
@@ -22,7 +22,8 @@ public class SingleSemesterActivity extends AppCompatActivity {
         moduleList = ModuleData.getModules();
         moduleAdapter = new ModuleAdapter(this, 0, moduleList);
 
-
+        ListView listView = (ListView) findViewById(R.id.modules_list_view);
+        listView.setAdapter(moduleAdapter);
 
     }
 }
