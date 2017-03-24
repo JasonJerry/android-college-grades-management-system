@@ -5,11 +5,12 @@ package models;
  */
 
 public class Student {
-    private String UID;
+    private String userId;
     private String indexNo;
     private String firstName;
     private String lastName;
     private String department;
+    private String birthday;
 
     public Student(){}
 
@@ -51,11 +52,20 @@ public class Student {
         this.department = department;
     }
 
-    public String getUID() {
-        return UID;
+
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUID(String UID) {
-        this.UID = UID;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getBirthday() {
+        return birthday;
+    }
+
+    public void setBirthday(String birthday) {
+        this.birthday = birthday;
     }
 }

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/module_container"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <Button
+        android:id="@+id/btnDisable"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="52dp"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="154dp"
+        android:text="Disable"
+        />
+
+    <Button
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btnDisable"
+        android:layout_alignBottom="@+id/btnDisable"
+        android:layout_centerHorizontal="true"
+        android:text="Edit" />
+
+    <Button
+        android:id="@+id/btnDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/btnEdit"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/btnEdit"
+        android:layout_toRightOf="@+id/btnEdit"
+        android:text="Delete" />
+
+    <TextView
+        android:id="@+id/txtCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnDisable"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/btnDisable"
+        android:layout_marginTop="58dp"
+        android:text="Code" />
+
+    <TextView
+        android:id="@+id/txtName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtCode"
+        android:layout_alignStart="@+id/txtCode"
+        android:layout_below="@+id/txtCode"
+        android:layout_marginTop="18dp"
+        tools:text="Name"
+        />
+
+    <TextView
+        android:id="@+id/txtCredits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/txtCode"
+        android:layout_centerHorizontal="true"
+        tools:text="Credits"
+        />
+
+    <TextView
+        android:id="@+id/txtGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtCredits"
+        android:layout_alignStart="@+id/txtCredits"
+        android:layout_alignTop="@+id/txtName"
+        tools:text="Grade"
+        />
+</RelativeLayout>
