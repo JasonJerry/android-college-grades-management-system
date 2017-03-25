@@ -23,8 +23,13 @@ public class Connection {
     }
 
     private Connection(){
-
+        FirebaseDatabase.getInstance().setPersistenceEnabled(true);
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();
     }
 
+    public DatabaseReference getDatabaseReference(){
+        return this.databaseReference;
+    }
 
 }

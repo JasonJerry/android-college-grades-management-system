@@ -1,9 +1,12 @@
 package models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by menuka on 2/21/17.
  */
 
+@IgnoreExtraProperties
 public class Student {
     private String userId;
     private String indexNo;

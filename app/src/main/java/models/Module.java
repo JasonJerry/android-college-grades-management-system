@@ -1,15 +1,20 @@
 package models;
 
-/**
- * Created by menuka on 2/21/17.
- */
+import com.google.firebase.database.IgnoreExtraProperties;
+import com.google.gson.annotations.SerializedName;
 
+/**
+ * Created by menuka on 2/21/17. */
+
+@IgnoreExtraProperties
 public class Module {
+    @SerializedName("module_id")
     private String moduleId;
     private String name;
     private String code;
     private String grade;
     private String credits;
+    private boolean enabled;
 
     public Module() {}
 
@@ -29,6 +34,14 @@ public class Module {
                 ", grade='" + grade + '\'' +
                 ", credits='" + credits + '\'' +
                 '}';
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public String getModuleId() {

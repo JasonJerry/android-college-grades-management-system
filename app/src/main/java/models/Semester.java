@@ -1,5 +1,7 @@
 package models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,6 +9,8 @@ import java.util.List;
  * Created by menuka on 2/21/17.
  */
 
+
+@IgnoreExtraProperties
 public class Semester {
     private String number;
     private String year;
@@ -22,6 +26,18 @@ public class Semester {
 
     public void editModule(Module module){
 
+    }
+
+    @Override
+    public String toString() {
+        return "Semester{" +
+                "number='" + number + '\'' +
+                ", year='" + year + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", sgpa='" + sgpa + '\'' +
+                ", enabled=" + enabled +
+                ", modules=" + modules +
+                '}';
     }
 
     public boolean isEnabled() {
