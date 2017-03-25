@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.menuka.loginandregistration.R;
@@ -22,6 +23,9 @@ import models.Module;
 
 public class ModuleAdapter extends ArrayAdapter<Module> {
     private static final String TAG = ModuleAdapter.class.getSimpleName();
+    private Button btnDisable;
+    private Button btnEdit;
+    private Button btnRemove;
 
     List<Module> moduleList;
 
@@ -51,6 +55,10 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
 
         TextView gradeTextView = (TextView) singleModuleView.findViewById(R.id.grade_text_view);
         gradeTextView.setText(currentModule.getGrade());
+
+        btnDisable = (Button) singleModuleView.findViewById(R.id.btnDisable);
+        btnEdit = (Button) singleModuleView.findViewById(R.id.btnEdit);
+        btnRemove = (Button) singleModuleView.findViewById(R.id.btnRemove);
 
 
         return singleModuleView;
