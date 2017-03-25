@@ -1,5 +1,6 @@
 package dummy_data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.Module;
@@ -12,6 +13,7 @@ public class ModuleData {
     private static List<Module> modules;
 
     public static List<Module> getModules() {
+        modules = new ArrayList<>();
         addData();
         return modules;
     }

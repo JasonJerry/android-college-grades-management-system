@@ -2,6 +2,8 @@ package com.example.menuka.loginandregistration;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.ListView;
 
 import java.util.List;
@@ -12,6 +14,7 @@ import models.Module;
 
 public class SingleSemesterActivity extends AppCompatActivity {
     private List<Module> moduleList;
+    private RecyclerView recyclerView;
     private ModuleAdapter moduleAdapter;
 
     @Override
@@ -25,5 +28,6 @@ public class SingleSemesterActivity extends AppCompatActivity {
         ListView listView = (ListView) findViewById(R.id.modules_list_view);
         listView.setAdapter(moduleAdapter);
 
+        Log.i("Dummy Data:", moduleList.toString());
     }
 }

@@ -26,7 +26,7 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
     List<Module> moduleList;
 
     public ModuleAdapter(@NonNull Context context, @LayoutRes int resource, List<Module> moduleList) {
-        super(context, resource);
+        super(context, resource, moduleList);
         this.moduleList = moduleList;
     }
 
@@ -37,19 +37,19 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
         Module currentModule = moduleList.get(position);
 
         if (singleModuleView == null) {
-            singleModuleView = LayoutInflater.from(getContext()).inflate(R.layout.single_module_view, parent, false);
+            singleModuleView = LayoutInflater.from(getContext()).inflate(R.layout.module_card, parent, false);
         }
 
-        TextView codeTextView = (TextView) singleModuleView.findViewById(R.id.txtCode);
+        TextView codeTextView = (TextView) singleModuleView.findViewById(R.id.code_text_view);
         codeTextView.setText(currentModule.getCode());
 
-        TextView nameTextView = (TextView) singleModuleView.findViewById(R.id.txtName);
+        TextView nameTextView = (TextView) singleModuleView.findViewById(R.id.name_text_view);
         nameTextView.setText(currentModule.getName());
 
-        TextView creditsTextView = (TextView) singleModuleView.findViewById(R.id.txtCredits);
+        TextView creditsTextView = (TextView) singleModuleView.findViewById(R.id.credits_text_view);
         creditsTextView.setText(currentModule.getCredits());
 
-        TextView gradeTextView = (TextView) singleModuleView.findViewById(R.id.txtGrade);
+        TextView gradeTextView = (TextView) singleModuleView.findViewById(R.id.grade_text_view);
         gradeTextView.setText(currentModule.getGrade());
 
 
