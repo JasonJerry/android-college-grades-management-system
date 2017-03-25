@@ -23,7 +23,8 @@
         <activity android:name=".StudentProfileActivity" />
         <activity android:name=".SemestersActivity" />
         <activity android:name=".SingleSemesterActivity" />
-        <activity android:name=".AddSemesterActivity"></activity>
+        <activity android:name=".AddSemesterActivity" />
+        <activity android:name=".AddModuleActivity"></activity>
     </application>
 
 </manifest>

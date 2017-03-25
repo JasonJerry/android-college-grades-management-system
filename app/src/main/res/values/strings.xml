@@ -30,4 +30,21 @@
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
     <string name="prompt_password">Password Prompt</string>
+
+    <string-array name="grades_array">
+        <item>A+</item>
+        <item>A</item>
+        <item>A-</item>
+        <item>B+</item>
+        <item>B</item>
+        <item>B-</item>
+        <item>C+</item>
+        <item>C</item>
+        <item>C-</item>
+        <item>D</item>
+        <item>I-we</item>
+        <item>I-ce</item>
+        <item>F</item>
+        <item>Absent</item>
+    </string-array>
 </resources>

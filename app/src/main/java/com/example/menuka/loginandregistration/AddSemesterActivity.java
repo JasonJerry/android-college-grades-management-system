@@ -38,6 +38,7 @@ public class AddSemesterActivity extends AppCompatActivity {
                 Semester s = new Semester();
                 s.setYear(yearEditText.getText().toString().trim());
                 s.setNumber(numberEditText.getText().toString().trim());
+                s.setEnabled(true);
 
                 databaseReference.child(s.getNumber()).setValue(s);
 

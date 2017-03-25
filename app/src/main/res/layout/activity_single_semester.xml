@@ -11,6 +11,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.menuka.loginandregistration.SingleSemesterActivity">
 
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnAddModule"
+        android:text="Add Module"
+        android:textSize="20sp"/>
+
     <ListView
         android:id="@+id/modules_list_view"
         android:layout_width="match_parent"

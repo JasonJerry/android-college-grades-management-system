@@ -1,8 +1,10 @@
 package com.example.menuka.loginandregistration;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -19,9 +21,9 @@ import models.Module;
 
 public class SingleSemesterActivity extends AppCompatActivity {
     private List<Module> moduleList;
-    private RecyclerView recyclerView;
     private ModuleAdapter moduleAdapter;
     private DatabaseReference databaseRef;
+    private Button btnAddModule;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +35,11 @@ public class SingleSemesterActivity extends AppCompatActivity {
 
         ListView listView = (ListView) findViewById(R.id.modules_list_view);
         listView.setAdapter(moduleAdapter);
+        btnAddModule = (Button) findViewById(R.id.btnAddModule);
 
-        databaseRef = Connection.getINSTANCE().getDatabaseReference();
+        databaseRef = Connection.getINSTANCE().getDatabaseReference().child("semesters");
 
-        databaseRef.child("semesters").addValueEventListener(new ValueEventListener() {
+        databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -45,6 +48,13 @@ public class SingleSemesterActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError databaseError) {
 
+            }
+        });
+
+        btnAddModule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(SingleSemesterActivity.this, AddModuleActivity.class));
             }
         });
     }
