@@ -41,5 +41,15 @@
         android:layout_alignLeft="@+id/btnAccountSettings"
         android:layout_alignStart="@+id/btnAccountSettings" />
 
+    <Button
+        android:id="@+id/btnSignOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btnReceivedFee"
+        android:layout_alignStart="@+id/btnReceivedFee"
+        android:layout_below="@+id/btnReceivedFee"
+        android:layout_marginTop="70dp"
+        android:text="Sign Out" />
+
 
 </RelativeLayout>
