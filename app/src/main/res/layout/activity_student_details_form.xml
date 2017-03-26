@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.menuka.loginandregistration.StudentDetailsForm">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="My Details"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="First Name"
+        android:layout_alignBottom="@+id/firstNameEditText"
+        android:layout_alignRight="@+id/textView"
+        android:layout_alignEnd="@+id/textView" />
+
+    <EditText
+        android:id="@+id/firstNameEditText"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteY="118dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_below="@+id/textView"
+        android:layout_alignLeft="@+id/lastNameEditText"
+        android:layout_alignStart="@+id/lastNameEditText" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Last Name"
+        android:layout_alignBottom="@+id/lastNameEditText"
+        android:layout_alignLeft="@+id/textView6"
+        android:layout_alignStart="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Birthday"
+        android:layout_alignBottom="@+id/birthdayEditText"
+        android:layout_alignRight="@+id/emailTextView"
+        android:layout_alignEnd="@+id/emailTextView" />
+
+    <EditText
+        android:id="@+id/lastNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_above="@+id/birthdayEditText"
+        android:layout_alignLeft="@+id/birthdayEditText"
+        android:layout_alignStart="@+id/birthdayEditText"
+        android:layout_marginBottom="20dp" />
+
+    <EditText
+        android:id="@+id/birthdayEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="date"
+        android:layout_alignBottom="@+id/indexNoEditText"
+        android:layout_alignLeft="@+id/indexNoEditText"
+        android:layout_alignStart="@+id/indexNoEditText"
+        android:layout_marginBottom="62dp" />
+
+    <TextView
+        android:id="@+id/emailTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Index No."
+        android:layout_alignBottom="@+id/indexNoEditText"
+        android:layout_alignRight="@+id/textView6"
+        android:layout_alignEnd="@+id/textView6" />
+
+    <EditText
+        android:id="@+id/indexNoEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:layout_marginRight="34dp"
+        android:layout_marginEnd="34dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Department"
+        android:layout_alignBottom="@+id/departmentsSpinner"
+        android:layout_toLeftOf="@+id/indexNoEditText"
+        android:layout_toStartOf="@+id/indexNoEditText"
+        android:layout_marginRight="25dp"
+        android:layout_marginEnd="25dp" />
+
+    <Spinner
+        android:id="@+id/departmentsSpinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="42dp"
+        android:layout_below="@+id/indexNoEditText"
+        android:layout_alignRight="@+id/indexNoEditText"
+        android:layout_alignEnd="@+id/indexNoEditText" />
+
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:layout_marginBottom="36dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignRight="@+id/indexNoEditText"
+        android:layout_alignEnd="@+id/indexNoEditText" />
+
+</RelativeLayout>

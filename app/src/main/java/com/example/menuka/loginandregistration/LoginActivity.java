@@ -102,7 +102,9 @@ public class LoginActivity extends AppCompatActivity {
                                 }
                             }
                         });
+                startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
             }
+
         });
     }
 }

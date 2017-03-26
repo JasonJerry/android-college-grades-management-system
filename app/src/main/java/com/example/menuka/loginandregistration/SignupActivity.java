@@ -107,6 +107,8 @@ public class SignupActivity extends AppCompatActivity {
                                 }
                             }
                         });
+
+                startActivity(new Intent(SignupActivity.this, StudentDetailsForm.class));
             }
         });
     }

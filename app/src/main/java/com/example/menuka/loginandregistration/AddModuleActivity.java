@@ -7,7 +7,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 
@@ -15,7 +14,7 @@ import firebase.Connection;
 import models.Module;
 
 public class AddModuleActivity extends AppCompatActivity {
-    private Spinner gradesList;
+    private Spinner gradesSpinner;
     private EditText codeEditText;
     private EditText nameEditText;
     private EditText creditsEditText;
@@ -30,16 +29,16 @@ public class AddModuleActivity extends AppCompatActivity {
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference().child("semesters").child("1");
 
-        gradesList = (Spinner) findViewById(R.id.spinner);
+        gradesSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> gradesAdapter = ArrayAdapter.createFromResource(this, R.array.grades_array, android.R.layout.simple_spinner_dropdown_item);
-        gradesList.setAdapter(gradesAdapter);
+        gradesSpinner.setAdapter(gradesAdapter);
 
         codeEditText = (EditText) findViewById(R.id.codeEditText);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         creditsEditText = (EditText) findViewById(R.id.creditsEditText);
         btnAdd = (Button) findViewById(R.id.btnAdd);
 
-        grade = gradesList.getSelectedItem().toString();
+        grade = gradesSpinner.getSelectedItem().toString();
 
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override

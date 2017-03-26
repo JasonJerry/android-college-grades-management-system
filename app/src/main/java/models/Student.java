@@ -14,6 +14,7 @@ public class Student {
     private String lastName;
     private String department;
     private String birthday;
+    private String email;
 
     public Student(){}
 
@@ -21,6 +22,14 @@ public class Student {
         this.indexNo = indexNo;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getIndexNo() {

@@ -47,4 +47,16 @@
         <item>F</item>
         <item>Absent</item>
     </string-array>
+
+    <string-array name="deparments_array">
+        <item>Electronic and Telecommuncation Engineering</item>
+        <item>Computer Science and Engineering</item>
+        <item>Electrical Engineering</item>
+        <item>Mechanical Engineering</item>
+        <item>Biomedical Engineering</item>
+        <item>Civil Engineering</item>
+        <item>Chemical and Process Engineering</item>
+        <item>Material Science Engineering</item>
+    </string-array>
+
 </resources>
