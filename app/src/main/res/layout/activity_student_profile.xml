@@ -15,41 +15,52 @@
         android:text="Grades Management"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_above="@+id/btnAccountSettings"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginLeft="20dp"
-        android:layout_marginStart="20dp" />
+        android:layout_alignParentStart="true" />
 
     <Button
         android:id="@+id/btnAccountSettings"
         android:text="Account Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="27dp"
-        android:layout_below="@+id/btnGradesManagement"
+        android:layout_above="@+id/btnReceivedFee"
         android:layout_alignLeft="@+id/btnGradesManagement"
-        android:layout_alignStart="@+id/btnGradesManagement" />
+        android:layout_alignStart="@+id/btnGradesManagement"
+        android:layout_marginBottom="15dp" />
 
     <Button
         android:id="@+id/btnReceivedFee"
         android:text="Received Feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="23dp"
-        android:layout_below="@+id/btnAccountSettings"
-        android:layout_alignLeft="@+id/btnAccountSettings"
-        android:layout_alignStart="@+id/btnAccountSettings" />
+        android:layout_centerVertical="true"
+        android:layout_alignRight="@+id/btnAccountSettings"
+        android:layout_alignEnd="@+id/btnAccountSettings" />
 
     <Button
         android:id="@+id/btnSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="Sign Out"
+        android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/btnReceivedFee"
         android:layout_alignStart="@+id/btnReceivedFee"
-        android:layout_below="@+id/btnReceivedFee"
-        android:layout_marginTop="70dp"
-        android:text="Sign Out" />
+        android:layout_marginBottom="99dp" />
+
+    <TextView
+        android:id="@+id/emailLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/btnAccountSettings"
+        android:layout_alignRight="@+id/btnAccountSettings"
+        android:layout_marginEnd="25dp"
+        android:layout_marginRight="25dp"
+        android:text="TextView"
+        android:textSize="24sp"
+        tools:text="Logged In as" />
 
 
 </RelativeLayout>

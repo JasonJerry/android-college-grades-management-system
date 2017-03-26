@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -15,6 +16,7 @@ public class StudentProfileActivity extends AppCompatActivity {
     private Button btnGradesManagement;
     private Button btnSignOut;
     private FirebaseAuth auth;
+    private TextView emailLabel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,9 @@ public class StudentProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_student_profile);
 
         initComponents();
+        if(auth.getCurrentUser() != null){
+            emailLabel.setText("Logged in as: " + auth.getCurrentUser().getEmail());
+        }
 
         btnAccountSettings.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,5 +59,6 @@ public class StudentProfileActivity extends AppCompatActivity {
         btnAccountSettings = (Button) findViewById(R.id.btnAccountSettings);
         btnGradesManagement = (Button) findViewById(R.id.btnGradesManagement);
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
+        emailLabel = (TextView) findViewById(R.id.emailLabel);
     }
 }

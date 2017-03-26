@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,7 +31,8 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
 
         if(auth.getCurrentUser() != null){
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            // Student has logged in
+            startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
             finish();
         }
 
@@ -64,6 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.i("Just After: ", "Login Clicked");
                 String email = inputEmail.getText().toString().trim();
                 final String password = inputPassword.getText().toString().trim();
 
@@ -96,13 +99,13 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }else{
                                     // login successful
-                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                    startActivity(intent);
+//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                    startActivity(intent);
+                                    startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
                                     finish();
                                 }
                             }
                         });
-                startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
             }
 
         });

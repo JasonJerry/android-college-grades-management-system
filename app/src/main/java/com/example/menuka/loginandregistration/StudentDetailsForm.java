@@ -42,11 +42,13 @@ public class StudentDetailsForm extends AppCompatActivity {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     Student s = dataSnapshot.getValue(Student.class);
-                    firstNameEditText.setText(s.getFirstName());
-                    lastNameEditText.setText(s.getLastName());
-                    birthdayEditText.setText(s.getBirthday());
-                    indexNoEditText.setText(s.getIndexNo());
-                    departmentsSpinner.setSelection(arrayAdapter.getPosition(s.getDepartment()));
+                    if(s != null) {
+                        firstNameEditText.setText(s.getFirstName());
+                        lastNameEditText.setText(s.getLastName());
+                        birthdayEditText.setText(s.getBirthday());
+                        indexNoEditText.setText(s.getIndexNo());
+                        departmentsSpinner.setSelection(arrayAdapter.getPosition(s.getDepartment()));
+                    }
                 }
 
                 @Override
