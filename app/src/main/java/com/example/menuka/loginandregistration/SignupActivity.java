@@ -104,15 +104,17 @@ public class SignupActivity extends AppCompatActivity {
                                 // the auth state listener will be notified and logic to handle the signed in user
                                 // will be handled in the listener
                                 if(!task.isSuccessful()){
-                                    Toast.makeText(SignupActivity.this, "Authentication failed.", Toast.LENGTH_SHORT).show();
+                                    // student registration failed
+                                    Toast.makeText(SignupActivity.this, "Sign Up Failed", Toast.LENGTH_SHORT).show();
                                 }else{
-                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
-                                    finish();
+                                    // student registration successful
+//                                    startActivity(new Intent(SignupActivity.this, MainActivity.class));
+                                    startActivity(new Intent(SignupActivity.this, StudentDetailsForm.class));
+                                    SignupActivity.this.finish();
                                 }
                             }
                         });
 
-                startActivity(new Intent(SignupActivity.this, StudentDetailsForm.class));
             }
         });
     }

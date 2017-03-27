@@ -1,5 +1,6 @@
 package com.example.menuka.loginandregistration;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -53,11 +54,11 @@ public class StudentDetailsForm extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(DatabaseError databaseError) {
+                    System.out.println("DatabaseError on saving Student details: " + databaseError);
 
                 }
             });
         }
-
 
 
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -78,6 +79,7 @@ public class StudentDetailsForm extends AppCompatActivity {
 
                     databaseReference.child(student.getUserId()).setValue(student);
 
+                    startActivity(new Intent(StudentDetailsForm.this, StudentProfileActivity.class));
                     StudentDetailsForm.this.finish();
                 }else{
                     Log.i("Error saving Student: ", "No user logged in.");

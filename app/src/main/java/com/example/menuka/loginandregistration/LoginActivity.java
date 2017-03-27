@@ -1,6 +1,7 @@
 package com.example.menuka.loginandregistration;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,12 +17,20 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
+
+import firebase.Connection;
+import models.Student;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText inputEmail, inputPassword;
     private FirebaseAuth auth;
     private ProgressBar progressBar;
     private Button btnSignUp, btnLogin, btnReset;
+    private int hasStudentFilledDetails = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,9 +108,16 @@ public class LoginActivity extends AppCompatActivity {
                                     }
                                 }else{
                                     // login successful
-//                                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-//                                    startActivity(intent);
-                                    startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
+                                    // redirect to dashboard only if personal information is filled
+
+                                    String uid = auth.getCurrentUser().getUid();
+                                    int hasStudentFilledDetails = hasStudentFilledDetails(uid);
+                                    if(hasStudentFilledDetails == 1){
+                                        startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
+                                    }else if(hasStudentFilledDetails == 0){
+                                        startActivity(new Intent(LoginActivity.this, StudentDetailsForm.class));
+                                    }
+
                                     finish();
                                 }
                             }
@@ -109,5 +125,48 @@ public class LoginActivity extends AppCompatActivity {
             }
 
         });
+    }
+
+    private int hasStudentFilledDetails(String uid){
+        final DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference().child("students").child(uid);
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Student student = dataSnapshot.getValue(Student.class);
+                String firstName = student.getFirstName();
+                String lastName = student.getLastName();
+                String department = student.getDepartment();
+                String birthday = student.getBirthday();
+                String indexNo = student.getIndexNo();
+
+                if(isStringNullOrEmpty(firstName) ||
+                        isStringNullOrEmpty(lastName)||
+                        isStringNullOrEmpty(department) ||
+                        isStringNullOrEmpty(birthday) ||
+                        isStringNullOrEmpty(indexNo)){
+                    hasStudentFilledDetails = 0;
+                }else{
+                    hasStudentFilledDetails = 1;
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return hasStudentFilledDetails;
+    }
+
+    private boolean isStringNullOrEmpty(String string){
+        if(string == null){
+            return true;
+        }else if(string.isEmpty()){
+            return true;
+        }else{
+            return false;
+        }
     }
 }
