@@ -20,8 +20,6 @@ import java.util.List;
 import adapters.SemesterAdapter;
 import firebase.Connection;
 import models.Semester;
-import models.Student;
-
 
 public class SemestersActivity extends AppCompatActivity {
     private TextView ogpaLabel;
@@ -31,6 +29,11 @@ public class SemestersActivity extends AppCompatActivity {
     private SemesterAdapter semesterAdapter;
     private ListView semesterListView;
     private FirebaseAuth auth;
+
+    private void removeSemester(String number){
+        DatabaseReference dbRef = Connection.getINSTANCE().getDatabaseReference().child("semesters").child(auth.getCurrentUser().getUid()).child(number);
+        dbRef.removeValue();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +61,7 @@ public class SemestersActivity extends AppCompatActivity {
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Semester semester = dataSnapshot.getValue(Semester.class);
                             semesterList.add(semester);
+                            semesterAdapter.notifyDataSetChanged();
                         }
 
                         @Override
@@ -78,6 +82,7 @@ public class SemestersActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(SemestersActivity.this, AddSemesterActivity.class));
+                finish();
             }
         });
     }

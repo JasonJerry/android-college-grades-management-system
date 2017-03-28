@@ -56,4 +56,12 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
 
         return semesterItemView;
     }
+
+    public Button getBtnMore() {
+        return btnMore;
+    }
+
+    public Button getBtnRemove() {
+        return btnRemove;
+    }
 }
