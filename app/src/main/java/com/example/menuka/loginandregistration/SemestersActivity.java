@@ -1,6 +1,7 @@
 package com.example.menuka.loginandregistration;
 
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -28,12 +29,10 @@ public class SemestersActivity extends AppCompatActivity {
     private List<Semester> semesterList;
     private SemesterAdapter semesterAdapter;
     private ListView semesterListView;
-    private FirebaseAuth auth;
+    private static FirebaseAuth auth;
 
-    private void removeSemester(String number){
-        DatabaseReference dbRef = Connection.getINSTANCE().getDatabaseReference().child("semesters").child(auth.getCurrentUser().getUid()).child(number);
-        dbRef.removeValue();
-    }
+    // TODO: implement Delete Semester
+    // TODO: lookUp onPause(), onDestroy() methods
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +44,13 @@ public class SemestersActivity extends AppCompatActivity {
         ogpaLabel.setText("OGPA: N/A");
 
         semesterList = new ArrayList<>();
-        semesterAdapter = new SemesterAdapter(this, R.layout.single_semester_on_profile, semesterList);
+        semesterAdapter = new SemesterAdapter(this, R.layout.single_semester_on_profile, semesterList, this);
         semesterListView.setAdapter(semesterAdapter);
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
 
         // one time listener for reading all semesters
-        databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+        databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(int i=1; i<=dataSnapshot.getChildrenCount(); i++){

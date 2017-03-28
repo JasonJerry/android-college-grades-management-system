@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -43,24 +44,25 @@ public class AddSemesterActivity extends AppCompatActivity {
                 semester.setEnabled(true);
 
                 final DatabaseReference dbRef = databaseReference.child("semesters").child(auth.getCurrentUser().getUid());
-                dbRef.addValueEventListener(new ValueEventListener() {
+                dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         System.out.println("DataSnapshot: " + dataSnapshot.toString());
                         // check if semester already exists before saving
                         boolean semesterExists = dataSnapshot.hasChild(semester.getNumber());
                         if (semesterExists) {
-                            AlertDialog alertDialog = new AlertDialog.Builder(AddSemesterActivity.this).create();
-                            alertDialog.setTitle("Error");
-                            alertDialog.setMessage("Semester" + semester.getNumber() + " already exists");
-                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-                                    new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            dialog.dismiss();
-                                        }
-                                    });
-                            alertDialog.show();
+//                            AlertDialog alertDialog = new AlertDialog.Builder(AddSemesterActivity.this).create();
+//                            alertDialog.setTitle("Error");
+//                            alertDialog.setMessage("Semester" + semester.getNumber() + " already exists");
+//                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+//                                    new DialogInterface.OnClickListener() {
+//                                        @Override
+//                                        public void onClick(DialogInterface dialog, int which) {
+//                                            dialog.dismiss();
+//                                        }
+//                                    });
+//                            alertDialog.show();
+                            Toast.makeText(AddSemesterActivity.this, "Semester Already exists", Toast.LENGTH_LONG).show();
                         } else {
                             dbRef.child(semester.getNumber()).setValue(semester);
 

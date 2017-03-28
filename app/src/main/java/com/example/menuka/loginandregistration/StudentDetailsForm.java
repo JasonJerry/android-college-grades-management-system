@@ -63,6 +63,8 @@ public class StudentDetailsForm extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                // TODO: Input Validation
+
                 Student student = new Student();
                 student.setFirstName(firstNameEditText.getText().toString().trim());
                 student.setLastName(lastNameEditText.getText().toString().trim());
