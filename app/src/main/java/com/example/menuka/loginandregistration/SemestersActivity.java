@@ -39,26 +39,13 @@ public class SemestersActivity extends AppCompatActivity {
 
         initComponents();
 
+        ogpaLabel.setText("OGPA: N/A");
+
         semesterList = new ArrayList<>();
         semesterAdapter = new SemesterAdapter(this, R.layout.single_semester_on_profile, semesterList);
         semesterListView.setAdapter(semesterAdapter);
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
-
-        databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-//                Semester s = dataSnapshot.getValue(Semester.class);
-//                System.out.println("Received s: " + s);
-//                semesterList.add(s);
-//                semesterList = dataSnapshot.getValue(Semester.class);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
         // one time listener for reading all semesters
         databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {

@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import firebase.Connection;
@@ -39,7 +40,7 @@ public class LoginActivity extends AppCompatActivity {
         // Get Firebase auth instance
         auth = FirebaseAuth.getInstance();
 
-        if(auth.getCurrentUser() != null){
+        if (auth.getCurrentUser() != null) {
             // Student has logged in
             startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
             finish();
@@ -79,17 +80,17 @@ public class LoginActivity extends AppCompatActivity {
                 String email = inputEmail.getText().toString().trim();
                 final String password = inputPassword.getText().toString().trim();
 
-                if(TextUtils.isEmpty(email)){
+                if (TextUtils.isEmpty(email)) {
                     Toast.makeText(getApplicationContext(), "Enter email address!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if (TextUtils.isEmpty(password)) {
                     Toast.makeText(getApplicationContext(), "Enter password!", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                if(progressBar != null) {
+                if (progressBar != null) {
                     progressBar.setVisibility(View.VISIBLE);
                 }
 
@@ -99,26 +100,21 @@ public class LoginActivity extends AppCompatActivity {
                             @Override
                             public void onComplete(@NonNull Task<AuthResult> task) {
 //                                progressBar.setVisibility(View.GONE);
-                                if(!task.isSuccessful()){
+                                if (!task.isSuccessful()) {
                                     // error occurred
-                                    if(password.length() < 6){
+                                    if (password.length() < 6) {
                                         inputPassword.setError(getString(R.string.minimum_password));
-                                    }else{
+                                    } else {
                                         Toast.makeText(LoginActivity.this, getString(R.string.auth_failed), Toast.LENGTH_SHORT).show();
                                     }
-                                }else{
+                                } else {
                                     // login successful
                                     // redirect to dashboard only if personal information is filled
-
                                     String uid = auth.getCurrentUser().getUid();
-                                    int hasStudentFilledDetails = hasStudentFilledDetails(uid);
-                                    if(hasStudentFilledDetails == 1){
-                                        startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
-                                    }else if(hasStudentFilledDetails == 0){
-                                        startActivity(new Intent(LoginActivity.this, StudentDetailsForm.class));
-                                    }
 
-                                    finish();
+                                    // redirectStudent to next Activity
+                                    redirectStudent(uid);
+
                                 }
                             }
                         });
@@ -127,28 +123,36 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private int hasStudentFilledDetails(String uid){
+
+    // to check if the firstName, lastName, indexNo, birthday, and department of a Student is filled
+    private void redirectStudent(String uid) {
         final DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference().child("students").child(uid);
+        final Student[] student = new Student[1];
+
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Student student = dataSnapshot.getValue(Student.class);
-                String firstName = student.getFirstName();
-                String lastName = student.getLastName();
-                String department = student.getDepartment();
-                String birthday = student.getBirthday();
-                String indexNo = student.getIndexNo();
+                System.out.println("hasStudentFilledDetails() => onDataChange()");
+                student[0] = dataSnapshot.getValue(Student.class);
+                String firstName = student[0].getFirstName();
+                String lastName = student[0].getLastName();
+                String department = student[0].getDepartment();
+                String birthday = student[0].getBirthday();
+                String indexNo = student[0].getIndexNo();
 
-                if(isStringNullOrEmpty(firstName) ||
-                        isStringNullOrEmpty(lastName)||
+                if (isStringNullOrEmpty(firstName) ||
+                        isStringNullOrEmpty(lastName) ||
                         isStringNullOrEmpty(department) ||
                         isStringNullOrEmpty(birthday) ||
-                        isStringNullOrEmpty(indexNo)){
-                    hasStudentFilledDetails = 0;
-                }else{
-                    hasStudentFilledDetails = 1;
+                        isStringNullOrEmpty(indexNo)) {
+
+                    startActivity(new Intent(LoginActivity.this, StudentDetailsForm.class));
+                } else {
+                    // every detail is filled
+                    startActivity(new Intent(LoginActivity.this, StudentProfileActivity.class));
                 }
 
+                finish();
             }
 
             @Override
@@ -157,15 +161,15 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        return hasStudentFilledDetails;
+
     }
 
-    private boolean isStringNullOrEmpty(String string){
-        if(string == null){
+    private boolean isStringNullOrEmpty(String string) {
+        if (string == null) {
             return true;
-        }else if(string.isEmpty()){
+        } else if (string.isEmpty()) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }

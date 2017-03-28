@@ -24,6 +24,19 @@ public class Student {
         this.lastName = lastName;
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "userId='" + userId + '\'' +
+                ", indexNo='" + indexNo + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", department='" + department + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public String getEmail() {
         return email;
     }
