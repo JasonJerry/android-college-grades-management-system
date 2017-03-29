@@ -2,6 +2,7 @@ package com.example.menuka.loginandregistration;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.widget.EditText;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -14,20 +15,21 @@ import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 /**
- * Created by menuka on 3/5/17.
+ * Created by menuka on 3/30/17.
  */
 
 @RunWith(AndroidJUnit4.class)
-public class NotesScreenTest {
+public class LoginTest {
     @Rule
-    public ActivityTestRule<LoginActivity> mLoginActivityTestRule =
-            new ActivityTestRule<LoginActivity>(LoginActivity.class);
+    public ActivityTestRule<SignupActivity> signupActivityActivityTestRule =
+            new ActivityTestRule<>(SignupActivity.class);
 
     @Test
-    public void clickLoginButton_validates_inputs() throws Exception {
-        onView(withId(R.id.btn_login))
+    public void clickLoginButton_validatesInputs() throws Exception{
+        // clicking register without filling details
+        onView(withId(R.id.sign_up_button))
                 .perform(click());
-        onView(withId(R.id.btn_login))
+        onView(withId(R.id.sign_up_button))
                 .check(matches(isDisplayed()));
     }
 }
