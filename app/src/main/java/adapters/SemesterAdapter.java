@@ -63,6 +63,13 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
         btnMore = (Button) semesterItemView.findViewById(R.id.btnMore);
         btnRemove = (Button) semesterItemView.findViewById(R.id.btnRemove);
 
+        btnMore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                semestersActivity.startSingleSemesterActivity(currentSemester.getNumber());
+            }
+        });
+
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

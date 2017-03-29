@@ -31,8 +31,13 @@ public class SemestersActivity extends AppCompatActivity {
     private ListView semesterListView;
     private static FirebaseAuth auth;
 
-    // TODO: implement Delete Semester
     // TODO: lookUp onPause(), onDestroy() methods
+
+    public void startSingleSemesterActivity(String number){
+        Intent i = new Intent(this, SingleSemesterActivity.class);
+        i.putExtra("semester", number);
+        startActivity(i);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

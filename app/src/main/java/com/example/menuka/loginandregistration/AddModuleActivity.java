@@ -1,5 +1,6 @@
 package com.example.menuka.loginandregistration;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
 import firebase.Connection;
@@ -21,13 +23,22 @@ public class AddModuleActivity extends AppCompatActivity {
     private String grade;
     private Button btnAdd;
     private DatabaseReference databaseReference;
+    private FirebaseAuth auth;
+    private static String semester;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_module);
 
-        databaseReference = Connection.getINSTANCE().getDatabaseReference().child("semesters").child("1");
+        auth = FirebaseAuth.getInstance();
+        semester = getIntent().getStringExtra("semester");
+
+        databaseReference = Connection.getINSTANCE().getDatabaseReference()
+                .child("semesters")
+                .child(auth.getCurrentUser().getUid())
+                .child(semester)
+                .child("modules");
 
         gradesSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> gradesAdapter = ArrayAdapter.createFromResource(this, R.array.grades_array, android.R.layout.simple_spinner_dropdown_item);
@@ -50,7 +61,17 @@ public class AddModuleActivity extends AppCompatActivity {
                 m.setGrade(grade);
 
                 databaseReference.child(m.getCode()).setValue(m);
+
+                onBackPressed();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, SingleSemesterActivity.class);
+        i.putExtra("semester", semester);
+        startActivity(i);
+        finish();
     }
 }

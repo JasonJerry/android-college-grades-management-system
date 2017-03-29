@@ -1,9 +1,11 @@
 package adapters;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,9 +14,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.menuka.loginandregistration.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 import java.util.List;
 
+import firebase.Connection;
 import models.Module;
 
 /**
@@ -28,21 +33,77 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
     private Button btnRemove;
 
     List<Module> moduleList;
+    private static Context context;
+    private String semester;
 
-    public ModuleAdapter(@NonNull Context context, @LayoutRes int resource, List<Module> moduleList) {
+    public ModuleAdapter(@NonNull Context context, @LayoutRes int resource, List<Module> moduleList, String semester) {
         super(context, resource, moduleList);
         this.moduleList = moduleList;
+        ModuleAdapter.context = context;
+        this.semester = semester;
     }
 
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View singleModuleView = convertView;
-        Module currentModule = moduleList.get(position);
+        final Module currentModule = moduleList.get(position);
 
         if (singleModuleView == null) {
             singleModuleView = LayoutInflater.from(getContext()).inflate(R.layout.module_card, parent, false);
         }
+
+        btnDisable = (Button)  singleModuleView.findViewById(R.id.btnDisable);
+        btnEdit = (Button) singleModuleView.findViewById(R.id.btnEdit);
+        btnRemove = (Button) singleModuleView.findViewById(R.id.btnRemove);
+
+        btnDisable.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnEdit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+
+        btnRemove.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(getContext())
+                        .setTitle("Delete Module")
+                        .setMessage("Are you sure you want to delete this module?")
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                // continue with delete
+                                DatabaseReference dbRef = Connection.getINSTANCE().getDatabaseReference()
+                                        .child("semesters")
+                                        .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+                                        .child(semester)
+                                        .child("modules")
+                                        .child(currentModule.getCode());
+
+                                dbRef.removeValue(); // remove from firebase
+
+                                moduleList.remove(currentModule);
+                                ModuleAdapter.this.notifyDataSetChanged();
+
+                            }
+                        }).setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do nothing
+                    }
+                }).setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
+
 
         TextView codeTextView = (TextView) singleModuleView.findViewById(R.id.code_text_view);
         codeTextView.setText(currentModule.getCode());

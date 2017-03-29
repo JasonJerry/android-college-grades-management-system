@@ -7,11 +7,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import adapters.ModuleAdapter;
@@ -24,17 +26,49 @@ public class SingleSemesterActivity extends AppCompatActivity {
     private ModuleAdapter moduleAdapter;
     private DatabaseReference databaseRef;
     private Button btnAddModule;
+    private FirebaseAuth auth;
+    private ListView modulesListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_single_semester);
 
-        moduleList = ModuleData.getModules();
-        moduleAdapter = new ModuleAdapter(this, 0, moduleList);
+        moduleList = new ArrayList<>();
+        modulesListView = (ListView) findViewById(R.id.modules_list_view);
 
-        ListView listView = (ListView) findViewById(R.id.modules_list_view);
-        listView.setAdapter(moduleAdapter);
+        final String semester = getIntent().getStringExtra("semester");
+
+        auth = FirebaseAuth.getInstance();
+
+        databaseRef = Connection.getINSTANCE().getDatabaseReference()
+                .child("semesters")
+                .child(auth.getCurrentUser().getUid())
+                .child(semester)
+                .child("modules");
+
+        final ListView listView = (ListView) findViewById(R.id.modules_list_view);
+
+        databaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // dataSnapshot contains every module in the semester
+                for(DataSnapshot child: dataSnapshot.getChildren()){
+                    Module m = child.getValue(Module.class);
+                    moduleList.add(m);
+                }
+
+                moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
+                modulesListView.setAdapter(moduleAdapter);
+                listView.setAdapter(moduleAdapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
         btnAddModule = (Button) findViewById(R.id.btnAddModule);
 
         databaseRef = Connection.getINSTANCE().getDatabaseReference().child("semesters");
@@ -54,7 +88,10 @@ public class SingleSemesterActivity extends AppCompatActivity {
         btnAddModule.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(SingleSemesterActivity.this, AddModuleActivity.class));
+                Intent i = new Intent(SingleSemesterActivity.this, AddModuleActivity.class);
+                i.putExtra("semester", semester);
+                startActivity(i);
+                finish();
             }
         });
     }
