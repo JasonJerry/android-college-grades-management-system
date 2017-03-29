@@ -51,18 +51,18 @@ public class AddSemesterActivity extends AppCompatActivity {
                         // check if semester already exists before saving
                         boolean semesterExists = dataSnapshot.hasChild(semester.getNumber());
                         if (semesterExists) {
-//                            AlertDialog alertDialog = new AlertDialog.Builder(AddSemesterActivity.this).create();
-//                            alertDialog.setTitle("Error");
-//                            alertDialog.setMessage("Semester" + semester.getNumber() + " already exists");
-//                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
-//                                    new DialogInterface.OnClickListener() {
-//                                        @Override
-//                                        public void onClick(DialogInterface dialog, int which) {
-//                                            dialog.dismiss();
-//                                        }
-//                                    });
-//                            alertDialog.show();
-                            Toast.makeText(AddSemesterActivity.this, "Semester Already exists", Toast.LENGTH_LONG).show();
+                            AlertDialog alertDialog = new AlertDialog.Builder(AddSemesterActivity.this).create();
+                            alertDialog.setTitle("Error");
+                            alertDialog.setMessage("Semester" + semester.getNumber() + " already exists");
+                            alertDialog.setButton(AlertDialog.BUTTON_NEUTRAL, "OK",
+                                    new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                            alertDialog.show();
+//                            Toast.makeText(AddSemesterActivity.this, "Semester Already exists", Toast.LENGTH_LONG).show();
                         } else {
                             dbRef.child(semester.getNumber()).setValue(semester);
 

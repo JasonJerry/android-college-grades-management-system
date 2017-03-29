@@ -43,19 +43,19 @@ public class SemestersActivity extends AppCompatActivity {
 
         ogpaLabel.setText("OGPA: N/A");
 
-        semesterList = new ArrayList<>();
-        semesterAdapter = new SemesterAdapter(this, R.layout.single_semester_on_profile, semesterList, this);
-        semesterListView.setAdapter(semesterAdapter);
-
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
 
-        // one time listener for reading all semesters
+        // value listener for semesters
         databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                for(int i=1; i<=dataSnapshot.getChildrenCount(); i++){
+                // values are read from the database
+                semesterList = new ArrayList<>();
+                semesterAdapter = new SemesterAdapter(SemestersActivity.this, R.layout.single_semester_on_profile, semesterList, SemestersActivity.this);
+                semesterListView.setAdapter(semesterAdapter);
+                for(DataSnapshot child: dataSnapshot.getChildren()){
                     // for each semester related to the authenticated Student
-                    databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).child(Integer.toString(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                    databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             Semester semester = dataSnapshot.getValue(Semester.class);
@@ -69,6 +69,7 @@ public class SemestersActivity extends AppCompatActivity {
                         }
                     });
                 }
+
             }
 
             @Override

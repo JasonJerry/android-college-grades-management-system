@@ -48,6 +48,7 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View semesterItemView= convertView;
         final Semester currentSemester = semesterList.get(position);
+        System.out.println("SemesterList: " + semesterList);
 
         if(semesterItemView == null){
             semesterItemView = LayoutInflater.from(getContext()).inflate(R.layout.single_semester_on_profile, parent, false);
