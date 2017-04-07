@@ -9,14 +9,14 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import models.Student;
-
 public class StudentProfileActivity extends AppCompatActivity {
     private Button btnAccountSettings;
     private Button btnGradesManagement;
+    private Button btnReceivedFeedback;
     private Button btnSignOut;
     private FirebaseAuth auth;
     private TextView emailLabel;
+    private static final String TAG = StudentProfileActivity.class.getSimpleName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,12 +52,23 @@ public class StudentProfileActivity extends AppCompatActivity {
                 }
             }
         });
+
+        btnReceivedFeedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(StudentProfileActivity.this, ReceivedFeedbackActivity.class);
+                startActivity(i);
+                StudentProfileActivity.this.finish();
+            }
+        });
+
     }
 
     private void initComponents() {
         auth = FirebaseAuth.getInstance();
         btnAccountSettings = (Button) findViewById(R.id.btnAccountSettings);
         btnGradesManagement = (Button) findViewById(R.id.btnGradesManagement);
+        btnReceivedFeedback = (Button) findViewById(R.id.btnReceivedFeedback);
         btnSignOut = (Button) findViewById(R.id.btnSignOut);
         emailLabel = (TextView) findViewById(R.id.emailLabel);
     }

@@ -25,7 +25,8 @@
         <activity android:name=".SingleSemesterActivity" />
         <activity android:name=".AddSemesterActivity" />
         <activity android:name=".AddModuleActivity" />
-        <activity android:name=".StudentDetailsForm"></activity>
+        <activity android:name=".StudentDetailsForm" />
+        <activity android:name=".ReceivedFeedbackActivity"></activity>
     </application>
 
 </manifest>

@@ -26,13 +26,13 @@
         android:text="Account Settings"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btnReceivedFee"
+        android:layout_above="@+id/btnReceivedFeedback"
         android:layout_alignLeft="@+id/btnGradesManagement"
         android:layout_alignStart="@+id/btnGradesManagement"
         android:layout_marginBottom="15dp" />
 
     <Button
-        android:id="@+id/btnReceivedFee"
+        android:id="@+id/btnReceivedFeedback"
         android:text="Received Feedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -46,8 +46,8 @@
         android:layout_height="wrap_content"
         android:text="Sign Out"
         android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnReceivedFee"
-        android:layout_alignStart="@+id/btnReceivedFee"
+        android:layout_alignLeft="@+id/btnReceivedFeedback"
+        android:layout_alignStart="@+id/btnReceivedFeedback"
         android:layout_marginBottom="99dp" />
 
     <TextView

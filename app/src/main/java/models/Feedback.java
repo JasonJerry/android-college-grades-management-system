@@ -5,20 +5,39 @@ package models;
  */
 
 public class Feedback {
+    private String id;
     private String rating;
     private String comment;
     private String studentId;
-    private String reviewerId;
+    private String reviewer;
+    private String date;
 
     public Feedback() {
 
     }
 
-    public Feedback(String rating, String comment, String studentId, String reviewerId) {
+    public Feedback(String rating, String comment, String studentId, String reviewerId, String date) {
         this.rating = rating;
         this.comment = comment;
         this.studentId = studentId;
-        this.reviewerId = reviewerId;
+        this.reviewer = reviewerId;
+        this.date = date;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getRating() {
@@ -45,11 +64,11 @@ public class Feedback {
         this.studentId = studentId;
     }
 
-    public String getReviewerId() {
-        return reviewerId;
+    public String getReviewer() {
+        return reviewer;
     }
 
-    public void setReviewerId(String reviewerId) {
-        this.reviewerId = reviewerId;
+    public void setReviewer(String reviewer) {
+        this.reviewer = reviewer;
     }
 }
