@@ -36,6 +36,7 @@ public class FeedbackAdapter extends ArrayAdapter<Feedback>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View feedbackItemView = convertView;
         Feedback currentFeedback = feedbackList.get(position);
+	Log.i("currentFeedbackObtained", "");
 
         if(feedbackItemView == null){
             feedbackItemView = LayoutInflater.from(getContext()).inflate(R.layout.single_feedback_card, parent, false);
