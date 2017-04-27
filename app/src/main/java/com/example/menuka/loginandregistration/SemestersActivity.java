@@ -63,6 +63,7 @@ public class SemestersActivity extends AppCompatActivity {
                     databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
+                            System.out.println("DataSnapshotError: " + dataSnapshot.toString());
                             Semester semester = dataSnapshot.getValue(Semester.class);
                             semesterList.add(semester);
                             semesterAdapter.notifyDataSetChanged();

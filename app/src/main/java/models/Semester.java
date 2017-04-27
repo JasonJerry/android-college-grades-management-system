@@ -9,7 +9,6 @@ import java.util.List;
  * Created by menuka on 2/21/17.
  */
 
-
 @IgnoreExtraProperties
 public class Semester {
     private String number;
@@ -17,6 +16,7 @@ public class Semester {
     private String studentId;
     private String sgpa;
     private boolean enabled;
+    private String totalCredits;
 
     private final List<Module> modules =  new ArrayList<>();
 
@@ -26,6 +26,14 @@ public class Semester {
 
     public void editModule(Module module){
 
+    }
+
+    public String getTotalCredits() {
+        return totalCredits;
+    }
+
+    public void setTotalCredits(String totalCredits) {
+        this.totalCredits = totalCredits;
     }
 
     @Override

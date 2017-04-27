@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -17,8 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import adapters.ModuleAdapter;
-import dummy_data.ModuleData;
 import firebase.Connection;
+import gpa.GPACalculator;
 import models.Module;
 
 public class SingleSemesterActivity extends AppCompatActivity {
@@ -28,6 +29,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
     private Button btnAddModule;
     private FirebaseAuth auth;
     private ListView modulesListView;
+    private TextView sgpaTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +38,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
 
         moduleList = new ArrayList<>();
         modulesListView = (ListView) findViewById(R.id.modules_list_view);
+        sgpaTextView = (TextView) findViewById(R.id.sgpa_text_view);
 
         final String semester = getIntent().getStringExtra("semester");
 
@@ -46,6 +49,25 @@ public class SingleSemesterActivity extends AppCompatActivity {
                 .child(auth.getCurrentUser().getUid())
                 .child(semester)
                 .child("modules");
+
+        DatabaseReference sgpaRef = Connection.getINSTANCE().getDatabaseReference()
+                .child("semesters")
+                .child(auth.getCurrentUser().getUid())
+                .child(semester)
+                .child("sgpa");
+
+        sgpaRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                System.out.println("SGPA: " + dataSnapshot.getValue().toString());
+                sgpaTextView.setText(dataSnapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         final ListView listView = (ListView) findViewById(R.id.modules_list_view);
 
@@ -58,6 +80,8 @@ public class SingleSemesterActivity extends AppCompatActivity {
                     moduleList.add(m);
                 }
 
+                String sgpa = GPACalculator.getSGPA((ArrayList<Module>)moduleList);
+//                setSGPA(sgpa);
                 moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
                 modulesListView.setAdapter(moduleAdapter);
                 listView.setAdapter(moduleAdapter);
@@ -94,6 +118,15 @@ public class SingleSemesterActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    private void setSGPA(String sgpa){
+        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference()
+                .child("semesters")
+                .child(auth.getCurrentUser().getUid())
+                .child("sgpa");
+
+        databaseReference.setValue(sgpa);
     }
 
 }

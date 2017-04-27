@@ -4,11 +4,11 @@ import android.content.Context;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.TextClock;
 import android.widget.TextView;
 
 import com.example.menuka.loginandregistration.R;
@@ -21,7 +21,7 @@ import models.Feedback;
  * Created by menuka on 4/6/17.
  */
 
-public class FeedbackAdapter extends ArrayAdapter<Feedback>{
+public class FeedbackAdapter extends ArrayAdapter<Feedback> {
     private static final String TAG = FeedbackAdapter.class.getSimpleName();
 
     List<Feedback> feedbackList;
@@ -36,9 +36,9 @@ public class FeedbackAdapter extends ArrayAdapter<Feedback>{
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View feedbackItemView = convertView;
         Feedback currentFeedback = feedbackList.get(position);
-	Log.i("currentFeedbackObtained", "");
+        Log.i("currentFeedbackObtained", "");
 
-        if(feedbackItemView == null){
+        if (feedbackItemView == null) {
             feedbackItemView = LayoutInflater.from(getContext()).inflate(R.layout.single_feedback_card, parent, false);
         }
 

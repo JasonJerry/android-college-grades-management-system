@@ -24,8 +24,6 @@ public class AddSemesterActivity extends AppCompatActivity {
     private Button btnAdd;
     private DatabaseReference databaseReference;
     private FirebaseAuth auth;
-    private int semesterCount;
-    private boolean semesterAlreadyExists = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +39,7 @@ public class AddSemesterActivity extends AppCompatActivity {
                 semester.setYear(yearEditText.getText().toString().trim());
                 semester.setNumber(numberEditText.getText().toString().trim());
                 semester.setEnabled(true);
+                semester.setSgpa("0.00");
 
                 final DatabaseReference dbRef = databaseReference.child("semesters").child(auth.getCurrentUser().getUid());
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -89,19 +88,4 @@ public class AddSemesterActivity extends AppCompatActivity {
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         auth = FirebaseAuth.getInstance();
     }
-
-    private void getSemesterCount() {
-        databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                semesterCount = (int) dataSnapshot.getChildrenCount();
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
-
 }
