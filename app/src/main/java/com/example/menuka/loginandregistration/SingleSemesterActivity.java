@@ -69,8 +69,6 @@ public class SingleSemesterActivity extends AppCompatActivity {
             }
         });
 
-        final ListView listView = (ListView) findViewById(R.id.modules_list_view);
-
         databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
@@ -81,11 +79,10 @@ public class SingleSemesterActivity extends AppCompatActivity {
                     moduleList.add(m);
                 }
 
-                String sgpa = GPACalculator.getSGPA((ArrayList<Module>)moduleList);
+//                String sgpa = GPACalculator.getSGPA((ArrayList<Module>)moduleList);
 //                setSGPA(sgpa);
                 moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
                 modulesListView.setAdapter(moduleAdapter);
-                listView.setAdapter(moduleAdapter);
             }
 
             @Override

@@ -13,7 +13,7 @@ import models.Semester;
 public class GPACalculator {
     private static HashMap<String, String> grades = new HashMap<>();
 
-    static {
+    private static void setGrades(){
         grades.put("A+", "4.2");
         grades.put("A", "4.0");
         grades.put("A-", "3.7");
@@ -30,6 +30,7 @@ public class GPACalculator {
     }
 
     public static String getSGPA(ArrayList<Module> modules){
+        setGrades();
         double totalCredits = getTotalCredits(modules);
         double totalGrades = 0;
         for (Module m: modules){

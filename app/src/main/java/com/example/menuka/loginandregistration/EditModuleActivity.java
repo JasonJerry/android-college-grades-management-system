@@ -40,7 +40,8 @@ public class EditModuleActivity extends AppCompatActivity {
         String name = getIntent().getStringExtra("name");
         final String code = getIntent().getStringExtra("code");
         String credits = getIntent().getStringExtra("credits");
-        final String grade = getIntent().getStringExtra("grade");
+        final String[] grade = {getIntent().getStringExtra("grade")};
+        final String[] newGrade = {""};
         semester = getIntent().getStringExtra("semester");
 
         codeEditText = (EditText) findViewById(R.id.codeEditText);
@@ -52,13 +53,24 @@ public class EditModuleActivity extends AppCompatActivity {
         creditsEditText = (EditText) findViewById(R.id.creditsEditText);
         creditsEditText.setText(credits);
 
-        gradesSpinner = (Spinner) findViewById(R.id.gradesSpinner);
+        gradesSpinner = (Spinner) findViewById(R.id.editGradesSpinner);
         ArrayAdapter<CharSequence> gradesAdapter = ArrayAdapter.createFromResource(this, R.array.grades_array, android.R.layout.simple_spinner_dropdown_item);
         gradesSpinner.setAdapter(gradesAdapter);
 
         final String[] grades = {"A+", "A", "A-", "B+", "B", "B-", "C+", "C", "C-", "D", "I-we", "I-ce", "F", "Absent"};
 
-        gradesSpinner.setSelection(Arrays.asList(grades).indexOf(grade));
+        gradesSpinner.setSelection(Arrays.asList(grades).indexOf(grade[0]));
+        gradesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                newGrade[0] = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         btnSave = (Button) findViewById(R.id.editButton);
         btnSave.setOnClickListener(new View.OnClickListener() {
@@ -68,19 +80,7 @@ public class EditModuleActivity extends AppCompatActivity {
                 m.setName(nameEditText.getText().toString().trim());
                 m.setCode(codeEditText.getText().toString().trim());
                 m.setCredits(creditsEditText.getText().toString().trim());
-
-                gradesSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                    @Override
-                    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                        m.setGrade(parent.getItemAtPosition(position).toString());
-
-                    }
-
-                    @Override
-                    public void onNothingSelected(AdapterView<?> parent) {
-                        m.setGrade(grade);
-                    }
-                });
+                m.setGrade(newGrade[0]);
 
                 // delete the existing module
                 databaseReference.child("semesters")
