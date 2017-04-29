@@ -2,6 +2,7 @@ package adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.menuka.loginandregistration.EditModuleActivity;
 import com.example.menuka.loginandregistration.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -67,7 +69,13 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(getContext(), EditModuleActivity.class);
+                i.putExtra("name", currentModule.getName());
+                i.putExtra("code", currentModule.getCode());
+                i.putExtra("credits", currentModule.getCredits());
+                i.putExtra("grade", currentModule.getGrade());
+                i.putExtra("semester", semester);
+                context.startActivity(i);
             }
         });
 

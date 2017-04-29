@@ -74,6 +74,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
         databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                moduleList = new ArrayList<>();
                 // dataSnapshot contains every module in the semester
                 for(DataSnapshot child: dataSnapshot.getChildren()){
                     Module m = child.getValue(Module.class);
