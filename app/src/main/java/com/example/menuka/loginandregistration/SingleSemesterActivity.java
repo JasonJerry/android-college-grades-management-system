@@ -30,6 +30,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ListView modulesListView;
     private TextView sgpaTextView;
+    private String sgpa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
         moduleList = new ArrayList<>();
         modulesListView = (ListView) findViewById(R.id.modules_list_view);
         sgpaTextView = (TextView) findViewById(R.id.sgpa_text_view);
+        sgpa = "0.00";
 
         final String semester = getIntent().getStringExtra("semester");
 
@@ -79,8 +81,17 @@ public class SingleSemesterActivity extends AppCompatActivity {
                     moduleList.add(m);
                 }
 
-//                String sgpa = GPACalculator.getSGPA((ArrayList<Module>)moduleList);
-//                setSGPA(sgpa);
+                String sgpa = GPACalculator.getInstance().getSGPA((ArrayList<Module>)moduleList);
+
+                try{
+                    sgpa = sgpa.substring(0, 4);
+                }catch (Exception e){
+                    System.out.println("Error in truncating SGPA: " + e.toString());
+                }
+
+                System.out.println("sgpa: " + sgpa);
+                sgpaTextView.setText("SGPA: " + sgpa);
+                setSGPA(sgpa);
                 moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
                 modulesListView.setAdapter(moduleAdapter);
             }

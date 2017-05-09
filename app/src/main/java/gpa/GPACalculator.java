@@ -12,8 +12,9 @@ import models.Semester;
 
 public class GPACalculator {
     private static HashMap<String, String> grades = new HashMap<>();
+    private static GPACalculator instance;
 
-    private static void setGrades(){
+    private static void initGrades(){
         grades.put("A+", "4.2");
         grades.put("A", "4.0");
         grades.put("A-", "3.7");
@@ -29,8 +30,19 @@ public class GPACalculator {
         grades.put("I-ce", "0.0");
     }
 
-    public static String getSGPA(ArrayList<Module> modules){
-        setGrades();
+    private GPACalculator(){
+        initGrades();
+    }
+
+    public static GPACalculator getInstance(){
+        if(instance == null){
+            instance = new GPACalculator();
+        }
+
+        return instance;
+    }
+
+    public String getSGPA(ArrayList<Module> modules){
         double totalCredits = getTotalCredits(modules);
         double totalGrades = 0;
         for (Module m: modules){
@@ -44,11 +56,11 @@ public class GPACalculator {
         return Double.toString(gpa);
     }
 
-    public static void getOGPA(ArrayList<Semester> semesters){
+    public void getOGPA(ArrayList<Semester> semesters){
 
     }
 
-    public static double getTotalCredits(ArrayList<Module> modules){
+    public double getTotalCredits(ArrayList<Module> modules){
         double totalCredits = 0;
         for(Module m: modules){
             totalCredits += Double.parseDouble(m.getCredits());

@@ -29,6 +29,7 @@ public class SemestersActivity extends AppCompatActivity {
     private SemesterAdapter semesterAdapter;
     private ListView semesterListView;
     private static FirebaseAuth auth;
+    private String ogpa;
 
     // TODO: lookUp onPause(), onDestroy() methods
 
@@ -45,7 +46,11 @@ public class SemestersActivity extends AppCompatActivity {
 
         initComponents();
 
-        ogpaLabel.setText("OGPA: N/A");
+        if("".equals(ogpa) || ogpa == null){
+            ogpaLabel.setText("OGPA: " + ogpa);
+        }else{
+            ogpaLabel.setText("OGPA: N/A");
+        }
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
 
@@ -97,5 +102,7 @@ public class SemestersActivity extends AppCompatActivity {
         btnAddSemester = (Button) findViewById(R.id.btnAddSemester);
         auth = FirebaseAuth.getInstance();
         semesterListView = (ListView) findViewById(R.id.semesters_list_view);
+
+        ogpa = "0.00";
     }
 }
