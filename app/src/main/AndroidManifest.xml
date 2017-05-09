@@ -28,7 +28,11 @@
         <activity android:name=".StudentDetailsForm" />
         <activity android:name=".ReceivedFeedbackActivity" />
         <activity android:name=".EditSemesterActivity" />
-        <activity android:name=".EditModuleActivity"></activity>
+        <activity android:name=".EditModuleActivity" />
+        <activity
+            android:name=".NavBar"
+            android:label="@string/title_activity_nav_bar"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
