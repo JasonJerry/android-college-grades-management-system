@@ -9,6 +9,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,35 +33,8 @@ public class ReceivedFeedbackActivity extends AppCompatActivity {
         initComponents();
         auth = FirebaseAuth.getInstance();
 
-        databaseReference.child("feedback").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                feedbackList = new ArrayList<Feedback>();
-                adapter = new FeedbackAdapter(ReceivedFeedbackActivity.this, R.layout.single_feedback_card, feedbackList);
-                feedbackListView.setAdapter(adapter);
+        getFeedback();
 
-                for(DataSnapshot child: dataSnapshot.getChildren()){
-                    databaseReference.child("feedback").child(auth.getCurrentUser().getUid()).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Feedback feedback = dataSnapshot.getValue(Feedback.class);
-                            feedbackList.add(feedback);
-                            adapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
 
     }
 
@@ -74,5 +48,24 @@ public class ReceivedFeedbackActivity extends AppCompatActivity {
     private void initComponents() {
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         feedbackListView = (ListView) findViewById(R.id.feedback_list_view);
+    }
+
+    private void getFeedback(){
+        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference();
+        Query query = databaseReference.child("feedback")
+                .orderByChild("studentId")
+                .equalTo(auth.getCurrentUser().getUid());
+        query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // all feedback nodes are received
+                System.out.println("Student's Feedback: " + dataSnapshot.toString());
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
     }
 }

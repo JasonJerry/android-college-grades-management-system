@@ -1,11 +1,14 @@
 package models;
 
+import com.google.firebase.database.IgnoreExtraProperties;
+
 /**
  * Created by menuka on 3/17/17.
  */
 
+@IgnoreExtraProperties()
 public class Feedback {
-    private String id;
+    private String key;
     private String rating;
     private String comment;
     private String studentId;
@@ -24,12 +27,12 @@ public class Feedback {
         this.date = date;
     }
 
-    public String getId() {
-        return id;
+    public String getKey() {
+        return key;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public String getDate() {
