@@ -108,6 +108,13 @@ public class SemestersActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SemestersActivity.this, StudentProfileActivity.class);
+        startActivity(i);
+        this.finish();
+    }
+
     private void initComponents() {
         ogpaLabel = (TextView) findViewById(R.id.ogpaLabel);
         btnAddSemester = (Button) findViewById(R.id.btnAddSemester);

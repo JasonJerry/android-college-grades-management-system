@@ -30,6 +30,14 @@ public class SingleSemesterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ListView modulesListView;
     private TextView sgpaTextView;
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(SingleSemesterActivity.this, SemestersActivity.class);
+        startActivity(i);
+        this.finish();
+    }
+
     private String sgpa;
 
     @Override

@@ -1,5 +1,6 @@
 package com.example.menuka.loginandregistration;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ListView;
@@ -61,6 +62,13 @@ public class ReceivedFeedbackActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(ReceivedFeedbackActivity.this, StudentProfileActivity.class);
+        startActivity(i);
+        this.finish();
     }
 
     private void initComponents() {
