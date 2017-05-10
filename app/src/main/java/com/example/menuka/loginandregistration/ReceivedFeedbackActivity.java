@@ -32,9 +32,35 @@ public class ReceivedFeedbackActivity extends AppCompatActivity {
 
         initComponents();
         auth = FirebaseAuth.getInstance();
+        feedbackList = new ArrayList<>();
+        feedbackListView = (ListView) findViewById(R.id.feedback_list_view);
 
-        getFeedback();
+        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference();
+        Query query = databaseReference.child("feedback")
+                .orderByChild("studentId")
+                .equalTo(auth.getCurrentUser().getUid());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // all feedback nodes are received
+                feedbackList.clear();
+                System.out.println("Student's Feedback: " + dataSnapshot.toString());
+                for(DataSnapshot feedback: dataSnapshot.getChildren()){
+                    // for every feedback given to the student
+                    Feedback f = feedback.getValue(Feedback.class);
+                    feedbackList.add(f);
+                    System.out.println("f: " + f);
+                }
 
+                adapter = new FeedbackAdapter(ReceivedFeedbackActivity.this, R.layout.single_feedback_card, feedbackList);
+                feedbackListView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
 
@@ -50,22 +76,4 @@ public class ReceivedFeedbackActivity extends AppCompatActivity {
         feedbackListView = (ListView) findViewById(R.id.feedback_list_view);
     }
 
-    private void getFeedback(){
-        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference();
-        Query query = databaseReference.child("feedback")
-                .orderByChild("studentId")
-                .equalTo(auth.getCurrentUser().getUid());
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // all feedback nodes are received
-                System.out.println("Student's Feedback: " + dataSnapshot.toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-    }
 }

@@ -2,6 +2,8 @@ package models;
 
 import com.google.firebase.database.IgnoreExtraProperties;
 
+import controllers.ReviewersController;
+
 /**
  * Created by menuka on 3/17/17.
  */
@@ -25,6 +27,18 @@ public class Feedback {
         this.studentId = studentId;
         this.reviewer = reviewerId;
         this.date = date;
+    }
+
+    @Override
+    public String toString() {
+        return "Feedback{" +
+                "key='" + key + '\'' +
+                ", rating='" + rating + '\'' +
+                ", comment='" + comment + '\'' +
+                ", studentId='" + studentId + '\'' +
+                ", reviewer='" + reviewer + '\'' +
+                ", date='" + date + '\'' +
+                '}';
     }
 
     public String getKey() {
@@ -68,7 +82,8 @@ public class Feedback {
     }
 
     public String getReviewer() {
-        return reviewer;
+        Reviewer reviewerById = ReviewersController.getReviewerById(this.reviewer);
+        return reviewerById.getFirstName() + reviewerById.getLastName();
     }
 
     public void setReviewer(String reviewer) {

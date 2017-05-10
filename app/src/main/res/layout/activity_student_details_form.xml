@@ -70,10 +70,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:layout_alignBottom="@+id/indexNoEditText"
+        android:layout_marginBottom="19dp"
+        android:layout_above="@+id/indexNoEditText"
         android:layout_alignLeft="@+id/indexNoEditText"
-        android:layout_alignStart="@+id/indexNoEditText"
-        android:layout_marginBottom="62dp" />
+        android:layout_alignStart="@+id/indexNoEditText" />
 
     <TextView
         android:id="@+id/emailTextView"
