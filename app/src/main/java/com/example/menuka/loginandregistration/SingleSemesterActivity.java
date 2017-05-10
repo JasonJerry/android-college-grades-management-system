@@ -91,7 +91,15 @@ public class SingleSemesterActivity extends AppCompatActivity {
 
                 System.out.println("sgpa: " + sgpa);
                 sgpaTextView.setText("SGPA: " + sgpa);
-                setSGPA(sgpa);
+                // set sgpa in database
+                DatabaseReference currentSemesterReference = Connection.getINSTANCE().getDatabaseReference()
+                        .child("semesters")
+                        .child(auth.getCurrentUser().getUid())
+                        .child(semester)
+                        .child("sgpa");
+
+                currentSemesterReference.setValue(sgpa);
+
                 moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
                 modulesListView.setAdapter(moduleAdapter);
             }

@@ -16,25 +16,16 @@ public class Semester {
     private String studentId;
     private String sgpa;
     private boolean enabled;
-    private String totalCredits;
 
-    private final List<Module> modules =  new ArrayList<>();
-
-    public void addModule(Module module){
-        this.modules.add(module);
-    }
-
-    public void editModule(Module module){
-
-    }
-
-    public String getTotalCredits() {
-        return totalCredits;
-    }
-
-    public void setTotalCredits(String totalCredits) {
-        this.totalCredits = totalCredits;
-    }
+//    private final List<Module> modules =  new ArrayList<>();
+//
+//    public void addModule(Module module){
+//        this.modules.add(module);
+//    }
+//
+//    public void editModule(Module module){
+//
+//    }
 
     @Override
     public String toString() {
@@ -44,7 +35,7 @@ public class Semester {
                 ", studentId='" + studentId + '\'' +
                 ", sgpa='" + sgpa + '\'' +
                 ", enabled=" + enabled +
-                ", modules=" + modules +
+//                ", modules=" + modules +
                 '}';
     }
 
@@ -64,9 +55,10 @@ public class Semester {
         this.sgpa = sgpa;
     }
 
-    public Module getModuleAtIndex(int index){
-        return modules.get(index);
-    }
+//    public Module getModuleAtIndex(int index){
+//        return modules.get(index);
+//    }
+
 
     public String getYear() {
         return year;

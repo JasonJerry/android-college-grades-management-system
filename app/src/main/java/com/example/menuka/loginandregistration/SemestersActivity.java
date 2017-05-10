@@ -53,24 +53,35 @@ public class SemestersActivity extends AppCompatActivity {
         }
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
+        semesterList = new ArrayList<>();
 
         // value listener for semesters
-        databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+        databaseReference
+                .child("semesters")
+                .child(auth.getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // values are read from the database
-                semesterList = new ArrayList<>();
-                semesterAdapter = new SemesterAdapter(SemestersActivity.this, R.layout.single_semester_on_profile, semesterList, SemestersActivity.this);
+                semesterList.clear();
+                semesterAdapter = new SemesterAdapter(SemestersActivity.this,
+                        R.layout.single_semester_on_profile, semesterList, SemestersActivity.this);
                 semesterListView.setAdapter(semesterAdapter);
-                for(DataSnapshot child: dataSnapshot.getChildren()){
+                for(DataSnapshot semesterDataSnapshot: dataSnapshot.getChildren()){
                     // for each semester related to the authenticated Student
-                    databaseReference.child("semesters").child(auth.getCurrentUser().getUid()).child(child.getKey()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    databaseReference.child("semesters")
+                            .child(auth.getCurrentUser().getUid())
+                            .child(semesterDataSnapshot.getKey())
+                            .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-                            System.out.println("DataSnapshotError: " + dataSnapshot.toString());
-                            Semester semester = dataSnapshot.getValue(Semester.class);
-                            semesterList.add(semester);
-                            semesterAdapter.notifyDataSetChanged();
+//                            System.out.println("DataSnapshotError: " + dataSnapshot.toString());
+                            try{
+                                Semester semester = dataSnapshot.getValue(Semester.class);
+                                semesterList.add(semester);
+                                semesterAdapter.notifyDataSetChanged();
+                            }catch (Exception e){
+                                System.out.println("Error: " + e.toString());
+                            }
                         }
 
                         @Override
