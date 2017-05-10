@@ -21,6 +21,7 @@ import models.Student;
 
 public class StudentDetailsForm extends AppCompatActivity {
     private Spinner departmentsSpinner;
+    private Spinner genderSpinner;
     private EditText firstNameEditText;
     private EditText lastNameEditText;
     private EditText indexNoEditText;
@@ -71,6 +72,7 @@ public class StudentDetailsForm extends AppCompatActivity {
                 student.setIndexNo(indexNoEditText.getText().toString().trim());
                 student.setBirthday(birthdayEditText.getText().toString().trim());
                 student.setDepartment(departmentsSpinner.getSelectedItem().toString());
+                student.setGender(genderSpinner.getSelectedItem().toString());
 
                 if(firebaseAuth.getCurrentUser() != null){
                     String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
@@ -95,6 +97,10 @@ public class StudentDetailsForm extends AppCompatActivity {
         departmentsSpinner = (Spinner) findViewById(R.id.departmentsSpinner);
         arrayAdapter = ArrayAdapter.createFromResource(this, R.array.deparments_array, android.R.layout.simple_spinner_dropdown_item);
         departmentsSpinner.setAdapter(arrayAdapter);
+
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        ArrayAdapter genderArrayAdapter = ArrayAdapter.createFromResource(this, R.array.gender, android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(genderArrayAdapter);
 
         firstNameEditText = (EditText) findViewById(R.id.firstNameEditText);
         lastNameEditText = (EditText) findViewById(R.id.lastNameEditText);

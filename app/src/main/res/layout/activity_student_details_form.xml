@@ -40,9 +40,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last Name"
-        android:layout_alignBottom="@+id/lastNameEditText"
         android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6" />
+        android:layout_alignStart="@+id/textView6"
+        android:layout_alignBottom="@+id/lastNameEditText" />
 
     <TextView
         android:id="@+id/textView8"
@@ -59,10 +59,10 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:layout_above="@+id/birthdayEditText"
+        android:layout_marginTop="12dp"
+        android:layout_below="@+id/firstNameEditText"
         android:layout_alignLeft="@+id/birthdayEditText"
-        android:layout_alignStart="@+id/birthdayEditText"
-        android:layout_marginBottom="20dp" />
+        android:layout_alignStart="@+id/birthdayEditText" />
 
     <EditText
         android:id="@+id/birthdayEditText"
@@ -125,5 +125,24 @@
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/indexNoEditText"
         android:layout_alignEnd="@+id/indexNoEditText" />
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/birthdayEditText"
+        android:layout_alignEnd="@+id/textView8"
+        android:layout_alignRight="@+id/textView8"
+        android:text="Gender" />
+
+    <Spinner
+        android:id="@+id/genderSpinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/birthdayEditText"
+        android:layout_alignLeft="@+id/birthdayEditText"
+        android:layout_alignRight="@+id/birthdayEditText"
+        android:layout_alignStart="@+id/birthdayEditText"
+        android:layout_alignTop="@+id/textView11" />
 
 </RelativeLayout>

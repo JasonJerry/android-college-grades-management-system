@@ -46,11 +46,7 @@ public class SemestersActivity extends AppCompatActivity {
 
         initComponents();
 
-        if("".equals(ogpa) || ogpa == null){
-            ogpaLabel.setText("OGPA: " + ogpa);
-        }else{
-            ogpaLabel.setText("OGPA: N/A");
-        }
+        ogpaLabel.setText("OGPA: " + ogpa);
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         semesterList = new ArrayList<>();

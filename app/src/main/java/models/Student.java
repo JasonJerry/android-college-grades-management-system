@@ -12,6 +12,7 @@ public class Student {
     private String indexNo;
     private String firstName;
     private String lastName;
+    private String gender;
     private String department;
     private String birthday;
     private String email;
@@ -22,6 +23,14 @@ public class Student {
         this.indexNo = indexNo;
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     @Override

@@ -18,7 +18,7 @@ public class ReviewersController {
 
     }
 
-    public Reviewer getReviewerById(String reviewerId){
+    public static Reviewer getReviewerById(String reviewerId){
         final Reviewer[] reviewer = new Reviewer[1];
         DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference();
         Query query = databaseReference.child("reviewers")
