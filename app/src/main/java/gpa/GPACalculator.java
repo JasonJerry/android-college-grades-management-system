@@ -56,8 +56,20 @@ public class GPACalculator {
         return Double.toString(gpa);
     }
 
-    public void getOGPA(ArrayList<Semester> semesters){
+    public double getOGPA(ArrayList<Semester> semesters){
+        double ogpa = 0.00;
+        double numerator = 0.00;
+        double denominator = 0.00;
+        for(Semester s: semesters){
+            numerator += Double.parseDouble(s.getSgpa()) * Double.parseDouble(s.getTotalCredits());
+            denominator += Double.parseDouble(s.getTotalCredits());
+        }
 
+        if(denominator > 0){
+            ogpa = numerator/denominator;
+        }
+
+        return ogpa;
     }
 
     public double getTotalCredits(ArrayList<Module> modules){

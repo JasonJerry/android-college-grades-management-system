@@ -15,17 +15,16 @@ public class Semester {
     private String year;
     private String studentId;
     private String sgpa;
+    private String totalCredits;
     private boolean enabled;
 
-//    private final List<Module> modules =  new ArrayList<>();
-//
-//    public void addModule(Module module){
-//        this.modules.add(module);
-//    }
-//
-//    public void editModule(Module module){
-//
-//    }
+    public String getTotalCredits() {
+        return totalCredits;
+    }
+
+    public void setTotalCredits(String totalCredits) {
+        this.totalCredits = totalCredits;
+    }
 
     @Override
     public String toString() {

@@ -19,6 +19,7 @@ import java.util.List;
 
 import adapters.SemesterAdapter;
 import firebase.Connection;
+import gpa.GPACalculator;
 import models.Semester;
 
 public class SemestersActivity extends AppCompatActivity {
@@ -46,7 +47,6 @@ public class SemestersActivity extends AppCompatActivity {
 
         initComponents();
 
-        ogpaLabel.setText("OGPA: " + ogpa);
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         semesterList = new ArrayList<>();
@@ -78,6 +78,10 @@ public class SemestersActivity extends AppCompatActivity {
                             }catch (Exception e){
                                 System.out.println("Error: " + e.toString());
                             }
+
+                            ogpa = Double.toString(GPACalculator.getInstance().getOGPA((ArrayList<Semester>)semesterList));
+                            System.out.println();
+                            ogpaLabel.setText("OGPA: " + ogpa);
                         }
 
                         @Override
@@ -86,7 +90,6 @@ public class SemestersActivity extends AppCompatActivity {
                         }
                     });
                 }
-
             }
 
             @Override
@@ -94,6 +97,8 @@ public class SemestersActivity extends AppCompatActivity {
 
             }
         });
+        // end of listener
+
 
         btnAddSemester.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -116,7 +121,6 @@ public class SemestersActivity extends AppCompatActivity {
         btnAddSemester = (Button) findViewById(R.id.btnAddSemester);
         auth = FirebaseAuth.getInstance();
         semesterListView = (ListView) findViewById(R.id.semesters_list_view);
-
         ogpa = "0.00";
     }
 }

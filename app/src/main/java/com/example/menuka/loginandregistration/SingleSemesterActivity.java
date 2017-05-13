@@ -15,7 +15,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import adapters.ModuleAdapter;
 import firebase.Connection;
@@ -97,6 +99,8 @@ public class SingleSemesterActivity extends AppCompatActivity {
                     System.out.println("Error in truncating SGPA: " + e.toString());
                 }
 
+                double totalCredits = GPACalculator.getInstance().getTotalCredits((ArrayList<Module>)moduleList);
+
                 System.out.println("sgpa: " + sgpa);
                 sgpaTextView.setText("SGPA: " + sgpa);
                 // set sgpa in database
@@ -107,6 +111,15 @@ public class SingleSemesterActivity extends AppCompatActivity {
                         .child("sgpa");
 
                 currentSemesterReference.setValue(sgpa);
+
+                Map<String, Object> totalCreditsValue = new HashMap<>();
+                totalCreditsValue.put("totalCredits", Double.toString(totalCredits));
+
+                Connection.getINSTANCE().getDatabaseReference()
+                        .child("semesters")
+                        .child(auth.getCurrentUser().getUid())
+                        .child(semester)
+                        .updateChildren(totalCreditsValue);
 
                 moduleAdapter = new ModuleAdapter(SingleSemesterActivity.this, R.layout.module_card, moduleList, semester);
                 modulesListView.setAdapter(moduleAdapter);
