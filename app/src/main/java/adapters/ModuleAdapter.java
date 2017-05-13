@@ -30,7 +30,6 @@ import models.Module;
 
 public class ModuleAdapter extends ArrayAdapter<Module> {
     private static final String TAG = ModuleAdapter.class.getSimpleName();
-    private Button btnDisable;
     private Button btnEdit;
     private Button btnRemove;
 
@@ -55,16 +54,8 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
             singleModuleView = LayoutInflater.from(getContext()).inflate(R.layout.module_card, parent, false);
         }
 
-        btnDisable = (Button)  singleModuleView.findViewById(R.id.btnDisable);
         btnEdit = (Button) singleModuleView.findViewById(R.id.btnEdit);
         btnRemove = (Button) singleModuleView.findViewById(R.id.btnRemove);
-
-        btnDisable.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
 
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,7 +103,6 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
             }
         });
 
-
         TextView codeTextView = (TextView) singleModuleView.findViewById(R.id.code_text_view);
         codeTextView.setText(currentModule.getCode());
 
@@ -120,15 +110,10 @@ public class ModuleAdapter extends ArrayAdapter<Module> {
         nameTextView.setText(currentModule.getName());
 
         TextView creditsTextView = (TextView) singleModuleView.findViewById(R.id.credits_text_view);
-        creditsTextView.setText(currentModule.getCredits());
+        creditsTextView.setText("Credits: "+currentModule.getCredits());
 
         TextView gradeTextView = (TextView) singleModuleView.findViewById(R.id.grade_text_view);
         gradeTextView.setText(currentModule.getGrade());
-
-        btnDisable = (Button) singleModuleView.findViewById(R.id.btnDisable);
-        btnEdit = (Button) singleModuleView.findViewById(R.id.btnEdit);
-        btnRemove = (Button) singleModuleView.findViewById(R.id.btnRemove);
-
 
         return singleModuleView;
     }
