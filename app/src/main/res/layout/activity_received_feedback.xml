@@ -17,6 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="Academic Records"
+        android:textColor="@color/black"
         android:textSize="30sp" />
 
     <ListView

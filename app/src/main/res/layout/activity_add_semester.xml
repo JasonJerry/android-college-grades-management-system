@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="New Semester"
+        android:textColor="@color/black"
         tools:layout_editor_absoluteX="136dp"
         tools:layout_editor_absoluteY="33dp"
         android:textSize="30sp"
@@ -29,6 +30,7 @@
         android:layout_marginStart="50dp"
         android:layout_marginTop="72dp"
         android:text="Number"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <TextView
@@ -40,6 +42,7 @@
         android:layout_below="@+id/txtViewNumber"
         android:layout_marginTop="74dp"
         android:text="Year"
+        android:textColor="@color/black"
         android:textSize="20sp" />
 
     <EditText
@@ -48,6 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/txtViewNumber"
         android:layout_alignBottom="@+id/txtViewNumber"
+        android:textColor="@color/black"
         android:layout_marginLeft="21dp"
         android:layout_marginStart="21dp"
         android:layout_toEndOf="@+id/txtViewNumber"
@@ -60,6 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/numberEditText"
+        android:textColor="@color/black"
         android:layout_alignRight="@+id/numberEditText"
         android:layout_centerVertical="true"
         android:ems="10"
@@ -74,5 +79,6 @@
         android:layout_below="@+id/yearEditText"
         android:layout_marginTop="62dp"
         android:text="Add"
+        android:textColor="@color/black"
         android:textSize="24sp" />
 </RelativeLayout>

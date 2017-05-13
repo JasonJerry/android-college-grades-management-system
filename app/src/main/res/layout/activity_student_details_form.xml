@@ -11,6 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Details"
+        android:textColor="@color/black"
         android:textSize="24sp"
         />
 
@@ -19,6 +20,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="First Name"
+        android:textColor="@color/black"
         android:layout_alignBottom="@+id/firstNameEditText"
         android:layout_alignRight="@+id/textView"
         android:layout_alignEnd="@+id/textView" />
@@ -29,6 +31,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         tools:layout_editor_absoluteY="118dp"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_below="@+id/textView"
@@ -40,6 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Last Name"
+        android:textColor="@color/black"
         android:layout_alignLeft="@+id/textView6"
         android:layout_alignStart="@+id/textView6"
         android:layout_alignBottom="@+id/lastNameEditText" />
@@ -49,6 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Birthday"
+        android:textColor="@color/black"
         android:layout_alignBottom="@+id/birthdayEditText"
         android:layout_alignRight="@+id/emailTextView"
         android:layout_alignEnd="@+id/emailTextView" />
@@ -59,6 +64,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         android:layout_marginTop="12dp"
         android:layout_below="@+id/firstNameEditText"
         android:layout_alignLeft="@+id/birthdayEditText"
@@ -80,6 +86,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Index No."
+        android:textColor="@color/black"
         android:layout_alignBottom="@+id/indexNoEditText"
         android:layout_alignRight="@+id/textView6"
         android:layout_alignEnd="@+id/textView6" />
@@ -90,6 +97,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
+        android:textColor="@color/black"
         android:layout_marginRight="34dp"
         android:layout_marginEnd="34dp"
         android:layout_centerVertical="true"
@@ -101,6 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Department"
+        android:textColor="@color/black"
         android:layout_alignBottom="@+id/departmentsSpinner"
         android:layout_toLeftOf="@+id/indexNoEditText"
         android:layout_toStartOf="@+id/indexNoEditText"
@@ -121,6 +130,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
+        android:textColor="@color/black"
         android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/indexNoEditText"
@@ -133,6 +143,7 @@
         android:layout_above="@+id/birthdayEditText"
         android:layout_alignEnd="@+id/textView8"
         android:layout_alignRight="@+id/textView8"
+        android:textColor="@color/black"
         android:text="Gender" />
 
     <Spinner
@@ -141,6 +152,7 @@
         android:layout_height="wrap_content"
         android:layout_alignEnd="@+id/birthdayEditText"
         android:layout_alignLeft="@+id/birthdayEditText"
+        android:textColor="@color/black"
         android:layout_alignRight="@+id/birthdayEditText"
         android:layout_alignStart="@+id/birthdayEditText"
         android:layout_alignTop="@+id/textView11" />

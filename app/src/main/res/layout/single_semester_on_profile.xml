@@ -22,6 +22,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:text="Semester 1"
+            android:textColor="@color/black"
             android:textSize="30sp"
             />
 
@@ -32,6 +33,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="16dp"
             android:text="SGPA: 3.95"
+            android:textColor="@color/black"
             android:textSize="30sp"
             />
 

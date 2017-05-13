@@ -13,6 +13,7 @@
     <Button
         android:id="@+id/btnGradesManagement"
         android:text="Grades Management"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="16dp"
@@ -24,6 +25,7 @@
     <Button
         android:id="@+id/btnAccountSettings"
         android:text="Account Settings"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnReceivedFeedback"
@@ -34,6 +36,7 @@
     <Button
         android:id="@+id/btnReceivedFeedback"
         android:text="Received Feedback"
+        android:textColor="@color/black"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
@@ -45,6 +48,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
+        android:textColor="@color/black"
         android:layout_alignParentBottom="true"
         android:layout_alignLeft="@+id/btnReceivedFeedback"
         android:layout_alignStart="@+id/btnReceivedFeedback"
@@ -54,11 +58,8 @@
         android:id="@+id/emailLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/btnAccountSettings"
-        android:layout_alignRight="@+id/btnAccountSettings"
-        android:layout_marginEnd="25dp"
-        android:layout_marginRight="25dp"
         android:text="TextView"
+        android:textColor="@color/black"
         android:textSize="24sp"
         tools:text="Logged In as" />
 
