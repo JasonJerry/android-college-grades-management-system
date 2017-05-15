@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -70,15 +71,40 @@ public class AddModuleActivity extends AppCompatActivity {
         btnAdd.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Module m = new Module();
-                m.setCode(codeEditText.getText().toString().trim());
-                m.setName(nameEditText.getText().toString().trim());
-                m.setCredits(creditsEditText.getText().toString().trim());
-                m.setGrade(grade);
+                final Module m = new Module();
+                // input validation
+                String codeInput = codeEditText.getText().toString().trim();
+                String nameInput = nameEditText.getText().toString().trim();
+                String creditsInput = creditsEditText.getText().toString().trim();
+                if(codeInput.isEmpty()){
+                    Toast.makeText(AddModuleActivity.this, "Code cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.isEmpty()){
+                    Toast.makeText(AddModuleActivity.this, "Name cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(creditsInput.isEmpty()){
+                    Toast.makeText(AddModuleActivity.this, "Credits cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(!Utils.isLegitModuleCode(codeInput)){
+                    Toast.makeText(AddModuleActivity.this, "Invalid module code", Toast.LENGTH_SHORT).show();
+                }else if(!Utils.isDouble(creditsInput)){
+                    Toast.makeText(AddModuleActivity.this, "Invalid credits value", Toast.LENGTH_SHORT).show();
+                }else if(Double.parseDouble(creditsInput) > 10.0 ||
+                        Double.parseDouble(creditsInput) < 1.00) {
+                    Toast.makeText(AddModuleActivity.this, "Credits should be between 1.0 and 10.0", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.length() < 2){
+                    Toast.makeText(AddModuleActivity.this, "Module name is too short", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.length() > 100){
+                    Toast.makeText(AddModuleActivity.this, "Module name is too long", Toast.LENGTH_SHORT).show();
+                }else{
+                    // everything's good
+                    // end of input validation
+                    m.setCode(codeInput.trim());
+                    m.setName(nameInput.trim());
+                    m.setCredits(creditsInput.trim());
+                    m.setGrade(grade);
 
-                databaseReference.child(m.getCode()).setValue(m);
+                    databaseReference.child(m.getCode()).setValue(m);
 
-                onBackPressed();
+                    onBackPressed();
+                }
             }
         });
     }

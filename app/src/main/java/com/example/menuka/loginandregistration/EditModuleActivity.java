@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -77,29 +78,53 @@ public class EditModuleActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final Module m = new Module();
-                m.setName(nameEditText.getText().toString().trim());
-                m.setCode(codeEditText.getText().toString().trim());
-                m.setCredits(creditsEditText.getText().toString().trim());
-                m.setGrade(newGrade[0]);
+                // input validation
+                String codeInput = codeEditText.getText().toString().trim();
+                String nameInput = nameEditText.getText().toString().trim();
+                String creditsInput = creditsEditText.getText().toString().trim();
+                if(codeInput.isEmpty()){
+                    Toast.makeText(EditModuleActivity.this, "Code cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.isEmpty()){
+                    Toast.makeText(EditModuleActivity.this, "Name cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(creditsInput.isEmpty()){
+                    Toast.makeText(EditModuleActivity.this, "Credits cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(!Utils.isLegitModuleCode(codeInput)){
+                    Toast.makeText(EditModuleActivity.this, "Invalid module code", Toast.LENGTH_SHORT).show();
+                }else if(!Utils.isDouble(creditsInput)){
+                    Toast.makeText(EditModuleActivity.this, "Invalid credits value", Toast.LENGTH_SHORT).show();
+                }else if(Double.parseDouble(creditsInput) > 10.0 ||
+                        Double.parseDouble(creditsInput) < 1.00) {
+                    Toast.makeText(EditModuleActivity.this, "Credits should be between 1.0 and 10.0", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.length() < 2){
+                    Toast.makeText(EditModuleActivity.this, "Module name is too short", Toast.LENGTH_SHORT).show();
+                }else if(nameInput.length() > 100){
+                    Toast.makeText(EditModuleActivity.this, "Module name is too long", Toast.LENGTH_SHORT).show();
+                }else{
+                    // everything's good
+                    // end of input validation
+                    m.setCode(codeInput.trim());
+                    m.setName(nameInput.trim());
+                    m.setCredits(creditsInput.trim());
+                    m.setGrade(newGrade[0]);
 
-                // delete the existing module
-                databaseReference.child("semesters")
-                        .child(auth.getCurrentUser().getUid())
-                        .child(semester)
-                        .child("modules")
-                        .child(code).removeValue();
+                    // delete the existing module
+                    databaseReference.child("semesters")
+                            .child(auth.getCurrentUser().getUid())
+                            .child(semester)
+                            .child("modules")
+                            .child(code).removeValue();
 
-                // add new module
-                databaseReference.child("semesters")
-                        .child(auth.getCurrentUser().getUid())
-                        .child(semester)
-                        .child("modules")
-                        .child(m.getCode())
-                        .setValue(m);
+                    // add new module
+                    databaseReference.child("semesters")
+                            .child(auth.getCurrentUser().getUid())
+                            .child(semester)
+                            .child("modules")
+                            .child(m.getCode())
+                            .setValue(m);
 
-                // go back to SingleSemesterActivity
-                onBackPressed();
-
+                    // go back to SingleSemesterActivity
+                    onBackPressed();
+                }
             }
         });
     }
