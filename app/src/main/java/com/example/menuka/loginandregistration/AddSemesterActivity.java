@@ -40,6 +40,7 @@ public class AddSemesterActivity extends AppCompatActivity {
                 semester.setNumber(numberEditText.getText().toString().trim());
                 semester.setEnabled(true);
                 semester.setSgpa("0.00");
+                semester.setTotalCredits("0.00");
 
                 final DatabaseReference dbRef = databaseReference.child("semesters").child(auth.getCurrentUser().getUid());
                 dbRef.addListenerForSingleValueEvent(new ValueEventListener() {

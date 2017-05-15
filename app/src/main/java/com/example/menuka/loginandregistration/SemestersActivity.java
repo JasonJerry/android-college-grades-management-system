@@ -70,7 +70,6 @@ public class SemestersActivity extends AppCompatActivity {
                             .addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
-//                            System.out.println("DataSnapshotError: " + dataSnapshot.toString());
                             try{
                                 Semester semester = dataSnapshot.getValue(Semester.class);
                                 semesterList.add(semester);
@@ -80,7 +79,10 @@ public class SemestersActivity extends AppCompatActivity {
                             }
 
                             ogpa = Double.toString(GPACalculator.getInstance().getOGPA((ArrayList<Semester>)semesterList));
-                            System.out.println();
+                            System.out.println("Printing OGPA: " + ogpa);
+                            if(ogpa.length() > 5){
+                                ogpa = ogpa.substring(0, 6);
+                            }
                             ogpaLabel.setText("OGPA: " + ogpa);
                         }
 
