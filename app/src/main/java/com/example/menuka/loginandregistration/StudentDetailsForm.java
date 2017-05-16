@@ -106,6 +106,7 @@ public class StudentDetailsForm extends AppCompatActivity {
                 String firstNameInput = firstNameEditText.getText().toString().trim();
                 String lastNameInput = lastNameEditText.getText().toString().trim();
                 String indexNoInput = indexNoEditText.getText().toString().trim();
+                String birthdayInput = birthdayEditText.getText().toString().trim();
 
                 if(firstNameInput.isEmpty()){
                     Toast.makeText(StudentDetailsForm.this, "First Name cannot be blank", Toast.LENGTH_SHORT).show();
@@ -121,8 +122,12 @@ public class StudentDetailsForm extends AppCompatActivity {
                     Toast.makeText(StudentDetailsForm.this, "Last Name should contain 1 to 100 characters", Toast.LENGTH_SHORT).show();
                 }else if(!Utils.isLegitIndexNumber(indexNoInput)) {
                     Toast.makeText(StudentDetailsForm.this, "Invalid Index Number", Toast.LENGTH_SHORT).show();
-                }else if(birthdayEditText.getText().toString().trim().isEmpty()){
+                }else if(birthdayInput.isEmpty()) {
                     Toast.makeText(StudentDetailsForm.this, "Birthday cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(Utils.isLegitDateFormat(birthdayInput)) {
+                    Toast.makeText(StudentDetailsForm.this, "Invalid Date Format", Toast.LENGTH_SHORT).show();
+                }else if(Utils.isDateFuture(birthdayInput)){
+                    Toast.makeText(StudentDetailsForm.this, "Birthday should be before today", Toast.LENGTH_SHORT).show();
                 }else{
                     // everything's good
                     // end of input validation
@@ -133,6 +138,7 @@ public class StudentDetailsForm extends AppCompatActivity {
                     student.setIndexNo(indexNoInput.toUpperCase());
                     student.setDepartment(departmentsSpinner.getSelectedItem().toString());
                     student.setGender(genderSpinner.getSelectedItem().toString());
+                    student.setBirthday(birthdayInput);
 
                     if(firebaseAuth.getCurrentUser() != null){
                         String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
