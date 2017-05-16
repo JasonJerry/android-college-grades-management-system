@@ -32,8 +32,6 @@ public class SemestersActivity extends AppCompatActivity {
     private static FirebaseAuth auth;
     private String ogpa;
 
-    // TODO: lookUp onPause(), onDestroy() methods
-
     public void startSingleSemesterActivity(String number){
         Intent i = new Intent(this, SingleSemesterActivity.class);
         i.putExtra("semester", number);
@@ -47,7 +45,6 @@ public class SemestersActivity extends AppCompatActivity {
         setContentView(R.layout.activity_semesters);
 
         initComponents();
-
 
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         semesterList = new ArrayList<>();

@@ -26,7 +26,6 @@ public class AddSemesterActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private FirebaseAuth auth;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,6 +106,13 @@ public class AddSemesterActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(AddSemesterActivity.this, SingleSemesterActivity.class);
+        startActivity(i);
+        finish();
     }
 
     private void initComponents() {

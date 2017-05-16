@@ -1,5 +1,7 @@
 package gpa;
 
+import com.example.menuka.loginandregistration.Utils;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -61,8 +63,11 @@ public class GPACalculator {
         double numerator = 0.0000000;
         double denominator = 0.0000000;
         for (Semester s : semesters) {
-            numerator += Double.parseDouble(s.getSgpa()) * Double.parseDouble(s.getTotalCredits());
-            denominator += Double.parseDouble(s.getTotalCredits());
+            // validate OGPA value in database
+            if(Utils.isDouble(s.getSgpa()) && Utils.isDouble(s.getTotalCredits())){
+                numerator += Double.parseDouble(s.getSgpa()) * Double.parseDouble(s.getTotalCredits());
+                denominator += Double.parseDouble(s.getTotalCredits());
+            }
         }
 
         if (denominator > 0) {

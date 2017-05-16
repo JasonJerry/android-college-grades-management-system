@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<AbsoluteLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,7 +7,7 @@
     tools:context="com.example.menuka.loginandregistration.StudentDetailsForm">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="My Details"
@@ -15,148 +15,165 @@
         android:textSize="24sp"
         />
 
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="First Name"
-        android:textColor="@color/black"
-        android:layout_alignBottom="@+id/firstNameEditText"
-        android:layout_alignRight="@+id/textView"
-        android:layout_alignEnd="@+id/textView" />
-
-    <EditText
-        android:id="@+id/firstNameEditText"
-        android:layout_width="215dp"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteY="118dp"
-        app:layout_constraintRight_toRightOf="parent"
-        android:layout_below="@+id/textView"
-        android:layout_alignLeft="@+id/lastNameEditText"
-        android:layout_alignStart="@+id/lastNameEditText" />
-
-    <TextView
-        android:id="@+id/textView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Last Name"
-        android:textColor="@color/black"
-        android:layout_alignLeft="@+id/textView6"
-        android:layout_alignStart="@+id/textView6"
-        android:layout_alignBottom="@+id/lastNameEditText" />
-
-    <TextView
-        android:id="@+id/textView8"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Birthday"
-        android:textColor="@color/black"
-        android:layout_alignBottom="@+id/birthdayEditText"
-        android:layout_alignRight="@+id/emailTextView"
-        android:layout_alignEnd="@+id/emailTextView" />
-
-    <EditText
-        android:id="@+id/lastNameEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:layout_marginTop="12dp"
-        android:layout_below="@+id/firstNameEditText"
-        android:layout_alignLeft="@+id/birthdayEditText"
-        android:layout_alignStart="@+id/birthdayEditText" />
-
-
-
-    <EditText
-        android:id="@+id/birthdayEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="date"
-        android:layout_marginBottom="19dp"
-        android:layout_above="@+id/indexNoEditText"
-        android:layout_alignLeft="@+id/indexNoEditText"
-        android:layout_alignStart="@+id/indexNoEditText" />
-
-    <TextView
-        android:id="@+id/emailTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Index No."
-        android:textColor="@color/black"
-        android:layout_alignBottom="@+id/indexNoEditText"
-        android:layout_alignRight="@+id/textView6"
-        android:layout_alignEnd="@+id/textView6" />
-
-    <EditText
-        android:id="@+id/indexNoEditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:textColor="@color/black"
-        android:layout_marginRight="34dp"
-        android:layout_marginEnd="34dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-    <TextView
-        android:id="@+id/textView10"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Department"
-        android:textColor="@color/black"
-        android:layout_alignBottom="@+id/departmentsSpinner"
-        android:layout_toLeftOf="@+id/indexNoEditText"
-        android:layout_toStartOf="@+id/indexNoEditText"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp" />
-
-    <Spinner
-        android:id="@+id/departmentsSpinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="42dp"
-        android:layout_below="@+id/indexNoEditText"
-        android:layout_alignRight="@+id/indexNoEditText"
-        android:layout_alignEnd="@+id/indexNoEditText" />
 
     <Button
         android:id="@+id/btnSave"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Save"
-        android:textColor="@color/black"
-        android:layout_marginBottom="36dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/indexNoEditText"
-        android:layout_alignEnd="@+id/indexNoEditText" />
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginStart="21dp"
+        android:layout_toEndOf="@+id/lastNameEditText"
+        android:layout_toRightOf="@+id/lastNameEditText"
+        android:layout_x="228dp"
+        android:layout_y="392dp"
+        android:text="Save"
+        android:textColor="@color/black" />
 
     <TextView
-        android:id="@+id/textView11"
+        android:id="@+id/textViewFirstName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/birthdayEditText"
-        android:layout_alignEnd="@+id/textView8"
-        android:layout_alignRight="@+id/textView8"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="60dp"
+        android:layout_x="35dp"
+        android:layout_y="54dp"
+        android:text="First Name"
         android:textColor="@color/black"
-        android:text="Gender" />
+        android:textSize="15sp" />
+
+    <EditText
+        android:id="@+id/firstNameEditText"
+        android:layout_width="215dp"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textViewFirstName"
+        android:layout_alignBottom="@+id/textViewFirstName"
+        android:layout_alignLeft="@+id/lastNameEditText"
+        android:layout_alignStart="@+id/lastNameEditText"
+        android:layout_x="133dp"
+        android:layout_y="38dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/black"
+        tools:layout_editor_absoluteY="118dp" />
+
+    <EditText
+        android:id="@+id/lastNameEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/indexNoEditText"
+        android:layout_alignStart="@+id/indexNoEditText"
+        android:layout_below="@+id/firstNameEditText"
+        android:layout_marginTop="87dp"
+        android:layout_x="133dp"
+        android:layout_y="101dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textViewLastName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textViewFirstName"
+        android:layout_alignStart="@+id/textViewFirstName"
+        android:layout_below="@+id/lastNameEditText"
+        android:layout_marginTop="45dp"
+        android:layout_x="40dp"
+        android:layout_y="117dp"
+        android:text="Last Name"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textViewBirthday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/birthdayEditText"
+        android:layout_alignEnd="@+id/textViewIndexNumber"
+        android:layout_alignRight="@+id/textViewIndexNumber"
+        android:layout_x="64dp"
+        android:layout_y="223dp"
+        android:text="Birthday"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textViewDepartment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btnSave"
+        android:layout_x="42dp"
+        android:layout_y="358dp"
+        android:text="Department"
+        android:textColor="@color/black" />
+
+    <TextView
+        android:id="@+id/textViewIndexNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/indexNoEditText"
+        android:layout_alignBottom="@+id/indexNoEditText"
+        android:layout_alignEnd="@+id/textViewFirstName"
+        android:layout_alignRight="@+id/textViewFirstName"
+        android:layout_x="53dp"
+        android:layout_y="292dp"
+        android:text="Index No."
+        android:textColor="@color/black" />
 
     <Spinner
         android:id="@+id/genderSpinner"
-        android:layout_width="match_parent"
+        android:layout_width="207dp"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/birthdayEditText"
-        android:layout_alignLeft="@+id/birthdayEditText"
-        android:textColor="@color/black"
-        android:layout_alignRight="@+id/birthdayEditText"
-        android:layout_alignStart="@+id/birthdayEditText"
-        android:layout_alignTop="@+id/textView11" />
+        android:layout_x="139dp"
+        android:layout_y="160dp"
+        android:textColor="@color/black" />
 
-</RelativeLayout>
+    <TextView
+        android:id="@+id/textViewGender"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/birthdayEditText"
+        android:layout_alignEnd="@+id/textViewBirthday"
+        android:layout_alignRight="@+id/textViewBirthday"
+        android:layout_x="56dp"
+        android:layout_y="171dp"
+        android:text="Gender"
+        android:textColor="@color/black" />
+
+    <EditText
+        android:id="@+id/birthdayEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/indexNoEditText"
+        android:layout_alignLeft="@+id/indexNoEditText"
+        android:layout_alignStart="@+id/indexNoEditText"
+        android:layout_marginBottom="19dp"
+        android:layout_x="136dp"
+        android:layout_y="201dp"
+        android:ems="10"
+        android:inputType="date" />
+
+    <EditText
+        android:id="@+id/indexNoEditText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/lastNameEditText"
+        android:layout_marginEnd="17dp"
+        android:layout_marginRight="17dp"
+        android:layout_marginTop="115dp"
+        android:layout_x="136dp"
+        android:layout_y="275dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/black" />
+
+    <Spinner
+        android:id="@+id/departmentsSpinner"
+        android:layout_width="213dp"
+        android:layout_height="wrap_content"
+        android:layout_x="136dp"
+        android:layout_y="346dp" />
+
+</AbsoluteLayout>
