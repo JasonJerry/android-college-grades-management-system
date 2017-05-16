@@ -51,8 +51,6 @@ public class SingleSemesterActivity extends AppCompatActivity {
         moduleList = new ArrayList<>();
         modulesListView = (ListView) findViewById(R.id.modules_list_view);
         sgpaTextView = (TextView) findViewById(R.id.sgpa_text_view);
-        sgpa = "0.00";
-        this.setSGPA(sgpa);
 
         semester = getIntent().getStringExtra("semester");
 
@@ -158,16 +156,6 @@ public class SingleSemesterActivity extends AppCompatActivity {
                 finish();
             }
         });
-    }
-
-    private void setSGPA(String sgpa){
-        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference()
-                .child("semesters")
-                .child(auth.getCurrentUser().getUid())
-                .child(semester)
-                .child("sgpa");
-
-        databaseReference.setValue(sgpa);
     }
 
 }

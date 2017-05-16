@@ -38,7 +38,7 @@ public class SemestersActivity extends AppCompatActivity {
         Intent i = new Intent(this, SingleSemesterActivity.class);
         i.putExtra("semester", number);
         startActivity(i);
-        this.finish();
+        finish();
     }
 
     @Override
