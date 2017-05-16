@@ -42,16 +42,39 @@ public class SignUpActivityTest {
         mStringToBeTyped = "harry@gmail.com";
     }
 
-    @Test
+    // input email only
+//    @Test
     public void changeText_emailAddress(){
         // Type the email and press register
         onView(withId(R.id.email_edit_text))
                 .perform(typeText(mStringToBeTyped), closeSoftKeyboard());
         onView(withId(R.id.sign_up_button)).perform(click());
 
-        // should remain in the same activity because passwors is not entered
+        // should remain in the same activity since the password is not blank
         onView(withId(R.id.email_edit_text))
-                .check(matches(withText(mStringToBeTyped)));
+                .check(matches(isDisplayed()));
+    }
+
+    // input email and password (existing email and password for signing up)
+//    @Test
+    public void inputEmailAndPasswordTest(){
+        String email = "harry@gmail.com";
+        String password = "123456";
+        // Type the email
+        onView(withId(R.id.email_edit_text))
+                .perform(typeText(email), closeSoftKeyboard());
+        onView(withId(R.id.password_edit_text))
+                .perform(typeText(password), closeSoftKeyboard());
+        onView(withId(R.id.sign_up_button)).perform(click());
+        onView(withId(R.id.email_edit_text))
+                .check(matches(isDisplayed()));
+    }
+
+    // input new email and password (valid)
+//    @Test
+    public void registerNewStudentTest(){
+        String email = "sheldon@gmail.com";
+        String password = "abcdef";
     }
 
     @Test
