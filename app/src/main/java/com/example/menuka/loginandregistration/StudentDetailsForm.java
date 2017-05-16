@@ -41,10 +41,6 @@ public class StudentDetailsForm extends AppCompatActivity {
 
     private DatePickerDialog.OnDateSetListener mDateSetListener;
 
-    public void datePicker(View view){
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

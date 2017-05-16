@@ -111,4 +111,12 @@ public class SignupActivity extends AppCompatActivity {
         super.onResume();
         progressBar.setVisibility(View.GONE);
     }
+
+    @Override
+    public void onBackPressed() {
+//        Intent i = new Intent(this, LoginActivity.class);
+//        startActivity(i);
+//        this.finish();
+        super.onBackPressed();
+    }
 }

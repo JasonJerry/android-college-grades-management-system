@@ -32,15 +32,16 @@ public class SingleSemesterActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private ListView modulesListView;
     private TextView sgpaTextView;
+    private String sgpa;
+    private String semester;
 
     @Override
     public void onBackPressed() {
         Intent i = new Intent(SingleSemesterActivity.this, SemestersActivity.class);
         startActivity(i);
-        this.finish();
+        finish();
     }
 
-    private String sgpa;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +52,9 @@ public class SingleSemesterActivity extends AppCompatActivity {
         modulesListView = (ListView) findViewById(R.id.modules_list_view);
         sgpaTextView = (TextView) findViewById(R.id.sgpa_text_view);
         sgpa = "0.00";
+        this.setSGPA(sgpa);
 
-        final String semester = getIntent().getStringExtra("semester");
+        semester = getIntent().getStringExtra("semester");
 
         auth = FirebaseAuth.getInstance();
 
@@ -162,6 +164,7 @@ public class SingleSemesterActivity extends AppCompatActivity {
         DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference()
                 .child("semesters")
                 .child(auth.getCurrentUser().getUid())
+                .child(semester)
                 .child("sgpa");
 
         databaseReference.setValue(sgpa);

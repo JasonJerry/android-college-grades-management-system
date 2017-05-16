@@ -175,4 +175,13 @@ public class LoginActivity extends AppCompatActivity {
             return false;
         }
     }
+
+    @Override
+    public void onBackPressed() {
+//        Intent i = new Intent(this, SignupActivity.class);
+//        startActivity(i);
+//        this.finish();
+
+        super.onBackPressed();
+    }
 }

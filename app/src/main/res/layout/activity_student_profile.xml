@@ -14,45 +14,46 @@
         android:id="@+id/btnGradesManagement"
         android:text="Grades Management"
         android:textColor="@color/black"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
         android:layout_above="@+id/btnAccountSettings"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="30dp" />
 
     <Button
         android:id="@+id/btnAccountSettings"
         android:text="Account Settings"
         android:textColor="@color/black"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_above="@+id/btnReceivedFeedback"
-        android:layout_alignLeft="@+id/btnGradesManagement"
-        android:layout_alignStart="@+id/btnGradesManagement"
-        android:layout_marginBottom="15dp" />
+        android:layout_alignRight="@+id/btnReceivedFeedback"
+        android:layout_alignEnd="@+id/btnReceivedFeedback"
+        android:layout_marginBottom="10dp" />
 
     <Button
         android:id="@+id/btnReceivedFeedback"
         android:text="Received Feedback"
         android:textColor="@color/black"
+        android:textSize="25sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_alignRight="@+id/btnAccountSettings"
-        android:layout_alignEnd="@+id/btnAccountSettings" />
+        android:layout_alignLeft="@+id/btnGradesManagement"
+        android:layout_alignStart="@+id/btnGradesManagement" />
 
     <Button
         android:id="@+id/btnSignOut"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sign Out"
+        android:textSize="25sp"
         android:textColor="@color/black"
-        android:layout_alignParentBottom="true"
-        android:layout_alignLeft="@+id/btnReceivedFeedback"
-        android:layout_alignStart="@+id/btnReceivedFeedback"
-        android:layout_marginBottom="99dp" />
+        android:layout_below="@+id/btnReceivedFeedback"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="64dp" />
 
     <TextView
         android:id="@+id/emailLabel"

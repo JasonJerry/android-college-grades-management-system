@@ -104,6 +104,7 @@ public class AddModuleActivity extends AppCompatActivity {
                     databaseReference.child(m.getCode()).setValue(m);
 
                     onBackPressed();
+
                 }
             }
         });

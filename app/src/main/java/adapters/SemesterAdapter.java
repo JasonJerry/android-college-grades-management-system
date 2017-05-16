@@ -2,6 +2,7 @@ package adapters;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -32,7 +33,6 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
 
     private Button btnMore;
     private Button btnRemove;
-
     List<Semester> semesterList;
     private SemestersActivity semestersActivity;
 
@@ -63,6 +63,7 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
         btnMore = (Button) semesterItemView.findViewById(R.id.btnMore);
         btnRemove = (Button) semesterItemView.findViewById(R.id.btnRemove);
 
+        // see more about the semester
         btnMore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,6 +71,7 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
             }
         });
 
+        // remove semester
         btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,13 +104,5 @@ public class SemesterAdapter extends ArrayAdapter<Semester> {
         });
 
         return semesterItemView;
-    }
-
-    public Button getBtnMore() {
-        return btnMore;
-    }
-
-    public Button getBtnRemove() {
-        return btnRemove;
     }
 }
