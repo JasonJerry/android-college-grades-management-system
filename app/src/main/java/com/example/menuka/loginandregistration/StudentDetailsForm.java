@@ -1,14 +1,20 @@
 package com.example.menuka.loginandregistration;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.icu.text.DateFormat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -16,8 +22,11 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
+
 import firebase.Connection;
 import models.Student;
+
 
 public class StudentDetailsForm extends AppCompatActivity {
     private Spinner departmentsSpinner;
@@ -29,6 +38,12 @@ public class StudentDetailsForm extends AppCompatActivity {
     private Button btnSave;
     private DatabaseReference databaseReference;
     private ArrayAdapter<CharSequence> arrayAdapter;
+
+    private DatePickerDialog.OnDateSetListener mDateSetListener;
+
+    public void datePicker(View view){
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,32 +76,83 @@ public class StudentDetailsForm extends AppCompatActivity {
             });
         }
 
+        birthdayEditText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(
+                        StudentDetailsForm.this,
+                        android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                        mDateSetListener,
+                        year, month, day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month++;
+                String date = month + "/" + dayOfMonth + "/" + year;
+                birthdayEditText.setText(date);
+            }
+        };
+
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: Input Validation
+                // input validation
+                String firstNameInput = firstNameEditText.getText().toString().trim();
+                String lastNameInput = lastNameEditText.getText().toString().trim();
+                String indexNoInput = indexNoEditText.getText().toString().trim();
 
-                Student student = new Student();
-                student.setFirstName(firstNameEditText.getText().toString().trim());
-                student.setLastName(lastNameEditText.getText().toString().trim());
-                student.setIndexNo(indexNoEditText.getText().toString().trim());
-                student.setBirthday(birthdayEditText.getText().toString().trim());
-                student.setDepartment(departmentsSpinner.getSelectedItem().toString());
-                student.setGender(genderSpinner.getSelectedItem().toString());
-
-                if(firebaseAuth.getCurrentUser() != null){
-                    String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
-                    student.setEmail(email);
-                    String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                    student.setUserId(uid);
-
-                    databaseReference.child(student.getUserId()).setValue(student);
-
-                    startActivity(new Intent(StudentDetailsForm.this, StudentProfileActivity.class));
-                    StudentDetailsForm.this.finish();
+                if(firstNameInput.isEmpty()){
+                    Toast.makeText(StudentDetailsForm.this, "First Name cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(lastNameInput.isEmpty()){
+                    Toast.makeText(StudentDetailsForm.this, "Last Name cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(indexNoInput.isEmpty()){
+                    Toast.makeText(StudentDetailsForm.this, "Index Number cannot be blank", Toast.LENGTH_SHORT).show();
+                }else if(firstNameInput.length() > 100 ||
+                        firstNameInput.length() < 1){
+                    Toast.makeText(StudentDetailsForm.this, "First Name should contain 1 to 100 characters", Toast.LENGTH_SHORT).show();
+                }else if(lastNameInput.length() > 100 ||
+                        lastNameInput.length() < 1) {
+                    Toast.makeText(StudentDetailsForm.this, "Last Name should contain 1 to 100 characters", Toast.LENGTH_SHORT).show();
+                }else if(!Utils.isLegitIndexNumber(indexNoInput)) {
+                    Toast.makeText(StudentDetailsForm.this, "Invalid Index Number", Toast.LENGTH_SHORT).show();
+                }else if(birthdayEditText.getText().toString().trim().isEmpty()){
+                    Toast.makeText(StudentDetailsForm.this, "Birthday cannot be blank", Toast.LENGTH_SHORT).show();
                 }else{
-                    Log.i("Error saving Student: ", "No user logged in.");
+                    // everything's good
+                    // end of input validation
+
+                    Student student = new Student();
+                    student.setFirstName(firstNameInput);
+                    student.setLastName(lastNameInput);
+                    student.setIndexNo(indexNoInput.toUpperCase());
+                    student.setDepartment(departmentsSpinner.getSelectedItem().toString());
+                    student.setGender(genderSpinner.getSelectedItem().toString());
+
+                    if(firebaseAuth.getCurrentUser() != null){
+                        String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                        student.setEmail(email);
+                        String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        student.setUserId(uid);
+
+                        databaseReference.child(student.getUserId()).setValue(student);
+
+                        startActivity(new Intent(StudentDetailsForm.this, StudentProfileActivity.class));
+                        StudentDetailsForm.this.finish();
+                    }else{
+                        Log.i("Error saving Student: ", "No user logged in.");
+                    }
                 }
+
             }
         });
     }
@@ -108,4 +174,5 @@ public class StudentDetailsForm extends AppCompatActivity {
         birthdayEditText = (EditText) findViewById(R.id.birthdayEditText);
         btnSave = (Button) findViewById(R.id.btnSave);
     }
+
 }

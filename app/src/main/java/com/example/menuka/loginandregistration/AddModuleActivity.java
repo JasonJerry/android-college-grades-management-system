@@ -96,7 +96,7 @@ public class AddModuleActivity extends AppCompatActivity {
                 }else{
                     // everything's good
                     // end of input validation
-                    m.setCode(codeInput.trim());
+                    m.setCode(codeInput.trim().toUpperCase());
                     m.setName(nameInput.trim());
                     m.setCredits(creditsInput.trim());
                     m.setGrade(grade);

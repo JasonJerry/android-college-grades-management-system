@@ -70,6 +70,8 @@
         android:layout_alignLeft="@+id/birthdayEditText"
         android:layout_alignStart="@+id/birthdayEditText" />
 
+
+
     <EditText
         android:id="@+id/birthdayEditText"
         android:layout_width="wrap_content"
