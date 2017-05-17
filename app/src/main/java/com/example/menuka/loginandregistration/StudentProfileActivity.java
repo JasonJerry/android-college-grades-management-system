@@ -58,7 +58,7 @@ public class StudentProfileActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(StudentProfileActivity.this, ReceivedFeedbackActivity.class);
                 startActivity(i);
-                StudentProfileActivity.this.finish();
+//                StudentProfileActivity.this.finish();
             }
         });
 

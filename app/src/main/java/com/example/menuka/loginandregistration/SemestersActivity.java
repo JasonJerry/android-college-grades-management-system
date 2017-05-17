@@ -46,6 +46,9 @@ public class SemestersActivity extends AppCompatActivity {
 
         initComponents();
 
+        Intent intent = getIntent();
+        String semester = intent.getStringExtra("semester");
+
         databaseReference = Connection.getINSTANCE().getDatabaseReference();
         semesterList = new ArrayList<>();
 

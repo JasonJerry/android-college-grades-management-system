@@ -12,10 +12,17 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import com.example.menuka.loginandregistration.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.List;
 
+import firebase.Connection;
 import models.Feedback;
+import models.Reviewer;
 
 /**
  * Created by menuka on 4/6/17.
@@ -48,12 +55,34 @@ public class FeedbackAdapter extends ArrayAdapter<Feedback> {
         TextView commentTextView = (TextView) feedbackItemView.findViewById(R.id.comment_text_view);
         commentTextView.setText(currentFeedback.getComment());
 
-        TextView reviewerTextView = (TextView) feedbackItemView.findViewById(R.id.reviewer_text_view);
-        reviewerTextView.setText(currentFeedback.getReviewer());
+        final TextView reviewerTextView = (TextView) feedbackItemView.findViewById(R.id.reviewer_text_view);
+        reviewerTextView.setText(currentFeedback.getReviewerId());
+
+        DatabaseReference databaseReference = Connection.getINSTANCE().getDatabaseReference();
+        Query query = databaseReference.child("reviewers")
+                .orderByChild("uid")
+                .equalTo(currentFeedback.getReviewerId());
+        query.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Reviewer r = null;
+                for(DataSnapshot reviewer: dataSnapshot.getChildren()){
+                     r = reviewer.getValue(Reviewer.class);
+                }
+
+                if(r != null){
+                    reviewerTextView.setText(r.getFirstName() + " " + r.getLastName());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         TextView dateTextView = (TextView) feedbackItemView.findViewById(R.id.date_text_view);
         dateTextView.setText(currentFeedback.getDate());
-
 
         return feedbackItemView;
     }

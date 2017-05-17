@@ -14,7 +14,7 @@ public class Feedback {
     private String rating;
     private String comment;
     private String studentId;
-    private String reviewer;
+    private String reviewerId;
     private String date;
 
     public Feedback() {
@@ -25,8 +25,12 @@ public class Feedback {
         this.rating = rating;
         this.comment = comment;
         this.studentId = studentId;
-        this.reviewer = reviewerId;
+        this.reviewerId = reviewerId;
         this.date = date;
+    }
+
+    public String getReviewerId() {
+        return reviewerId;
     }
 
     @Override
@@ -36,7 +40,7 @@ public class Feedback {
                 ", rating='" + rating + '\'' +
                 ", comment='" + comment + '\'' +
                 ", studentId='" + studentId + '\'' +
-                ", reviewer='" + reviewer + '\'' +
+                ", reviewerId='" + reviewerId + '\'' +
                 ", date='" + date + '\'' +
                 '}';
     }
@@ -81,12 +85,7 @@ public class Feedback {
         this.studentId = studentId;
     }
 
-    public String getReviewer() {
-        Reviewer reviewerById = ReviewersController.getReviewerById(this.reviewer);
-        return reviewerById.getFirstName() + reviewerById.getLastName();
-    }
-
-    public void setReviewer(String reviewer) {
-        this.reviewer = reviewer;
+    public void setReviewerId(String reviewerId) {
+        this.reviewerId = reviewerId;
     }
 }
