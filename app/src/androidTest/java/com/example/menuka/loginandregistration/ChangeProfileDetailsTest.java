@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.action.ViewActions.closeSoftKeyboard;
+import static android.support.test.espresso.action.ViewActions.replaceText;
 import static android.support.test.espresso.action.ViewActions.typeText;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -20,7 +21,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 
 @RunWith(AndroidJUnit4.class)
-public class AddSemesterTest {
+public class ChangeProfileDetailsTest {
     @Rule
     public ActivityTestRule<LoginActivity> loginActivityActivityTestRule =
             new ActivityTestRule<>(LoginActivity.class);
@@ -34,23 +35,29 @@ public class AddSemesterTest {
 
     @Test
     public void addSemesterTest(){
-        String number = "8";
-        String year = "2018";
-        onView(withId(R.id.btnGradesManagement))
+        String birthday = "02/21/1994";
+        String lastName = "Max";
+        onView(withId(R.id.btnAccountSettings))
                 .perform(click());
 
-        onView(withId(R.id.btnAddSemester))
+        onView(withId(R.id.lastNameEditText))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.lastNameEditText))
                 .perform(click());
 
-        onView(withId(R.id.numberEditText))
-                .perform(typeText(number), closeSoftKeyboard());
+        onView(withId(R.id.lastNameEditText))
+                .perform(typeText(lastName), closeSoftKeyboard());
 
-        onView(withId(R.id.yearEditText))
-                .perform(typeText(year), closeSoftKeyboard());
+        onView(withId(R.id.birthdayEditText))
+                .perform(replaceText(birthday), closeSoftKeyboard());
 
-        onView(withId(R.id.btnAdd))
+        onView(withId(R.id.btnSave))
+                .check(matches(isDisplayed()));
+
+        onView(withId(R.id.btnSave))
                 .perform(click());
+
     }
-
 }
 

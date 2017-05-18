@@ -43,7 +43,7 @@ public class SignUpActivityTest {
     }
 
     // input email only
-    @Test
+//    @Test
     public void changeText_emailAddress(){
         // Type the email and press register
         onView(withId(R.id.email_edit_text))
@@ -77,11 +77,11 @@ public class SignUpActivityTest {
         String password = "abcdef";
     }
 
-//    @Test
+    @Test
     public void checkSignUpButton_validatesInputs() throws Exception{
         onView(withId(R.id.sign_up_button))
                 .perform(click());
-        onView(withId(R.id.sign_up_button))
+        onView(withId(R.id.email_edit_text))
                 .check(matches(isDisplayed()));
     }
 
