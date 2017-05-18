@@ -32,7 +32,7 @@ public class SignUpActivityTest {
     // fire up this activity for testing
     @Rule
     public ActivityTestRule<SignupActivity> signupActivityActivityTestRule =
-            new ActivityTestRule<>(SignupActivity.class, true, false);
+            new ActivityTestRule<>(SignupActivity.class);
 
     @Before
     public void initValidString() throws Exception{
@@ -43,7 +43,7 @@ public class SignUpActivityTest {
     }
 
     // input email only
-//    @Test
+    @Test
     public void changeText_emailAddress(){
         // Type the email and press register
         onView(withId(R.id.email_edit_text))
@@ -51,7 +51,7 @@ public class SignUpActivityTest {
         onView(withId(R.id.sign_up_button)).perform(click());
 
         // should remain in the same activity since the password is not blank
-        onView(withId(R.id.email_edit_text))
+        onView(withId(R.id.sign_up_button))
                 .check(matches(isDisplayed()));
     }
 
@@ -77,7 +77,7 @@ public class SignUpActivityTest {
         String password = "abcdef";
     }
 
-    @Test
+//    @Test
     public void checkSignUpButton_validatesInputs() throws Exception{
         onView(withId(R.id.sign_up_button))
                 .perform(click());
